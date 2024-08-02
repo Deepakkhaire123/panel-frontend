@@ -5,6 +5,20 @@
     <div class="add_website_block">
       <div id="userSearchUl" class="search-wrap">
         <div class="searchbox">
+            <div class="business-panel">
+                <select  class="business-option" formControlName="business">
+                    <option value="">Choose Business</option>
+                    <option value="B2B">B2B</option>
+                    <option value="B2C">B2C</option>
+                </select>
+              </div>
+              <div class="business-panel">
+                <select class="business-option" formControlName="panelFor">
+                    <option value="">Choose User</option>
+                    <option value="AGENT">Agent</option>
+                    <option value="USER">User</option>
+                </select>
+              </div>
           <div class="userid">
             <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="name"
               (keydown.space)="$event.preventDefault()" placeholder="Enter Name" required=""
@@ -53,20 +67,7 @@
               <small *ngIf="password?.errors?.['minlength']">Password: min 6 character.</small>
             </p> -->
           </div>
-          <div class="business-panel">
-            <select  class="business-option" formControlName="business">
-                <option value="">Choose Business</option>
-                <option value="B2B">B2B</option>
-                <option value="B2C">B2C</option>
-            </select>
-          </div>
-          <div class="business-panel">
-            <select class="business-option" formControlName="panelFor">
-                <option value="">Choose User</option>
-                <option value="AGENT">Agent</option>
-                <option value="USER">User</option>
-            </select>
-          </div>
+          
         </div>
       </div><button type="submit" id="search" class="btn-send add_website_btn">Add</button>
       <!-- <small style="color: red; font-size: 12px; font-weight: bold;">
