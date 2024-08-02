@@ -1,0 +1,57 @@
+<div class="div-wrap">
+    <h2>Add Mother Panel</h2>
+    <!-- <form [formGroup]="addMarshalForm" (ngSubmit)="addData()"> -->
+    <form >
+      <div class="add_website_block">
+        <div id="userSearchUl" class="search-wrap">
+          <div class="searchbox">
+            <div class="userid">
+              <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="name"
+                (keydown.space)="$event.preventDefault()" placeholder="Enter website" required=""
+                class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
+              <!-- <p *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="validations-TTp topPWidth">
+                <small *ngIf="name?.errors?.['required']" class="text-danger error-message-place">name is
+                  required.</small>
+                <small *ngIf="name?.errors?.['minlength']">name must be at least 4 characters long</small>
+                <small *ngIf="name?.errors?.['pattern']" class="text-danger error-message-place">Special
+                  characters are not allowed.</small>
+              </p> -->
+  
+            </div>
+  
+          </div>
+        </div><button type="submit" id="search" class="btn-send add_website_btn">Add</button>
+        <!-- <small style="color: red; font-size: 12px; font-weight: bold;">
+          {{ErrMSG}}
+        </small> -->
+      </div>
+    </form>
+    <div>
+      <table class="table">
+        <thead class="tablehead">
+          <tr>
+            <th  id="hWebsiteName1" >Sr.No</th>
+            <th  id="hWebsiteName2" >Website</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="websiteName" class="site" >1</td>
+            <td id="websiteName" class="site" >user1</td>
+           
+          </tr>
+          <!-- <tr *ngFor="let item of marshelList; let i = index">
+            <td id="websiteName" class="site" style="width: 20px;">{{i + 1}}</td>
+            <td id="websiteName" class="site" style="width: 20px;">{{item.name}}</td>
+            <td id="websiteName" class="site" style="width: 20px;">{{item.userId}}</td>
+             <td id="websiteName" class="site">*******************</td> 
+            <td id="multiBtn" class="action" >
+              <div class="row"><button class="action_dd" data-toggle="modal" data-target="#myModal"
+                  (click)="getUserId(item._id)">Change
+                  Password</button></div>
+            </td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+  </div>

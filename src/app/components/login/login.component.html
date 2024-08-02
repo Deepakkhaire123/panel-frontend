@@ -16,10 +16,10 @@
           </p>
             <dd>
               <input id="password" [type]="showPassword? 'text' : 'password' " name="password" placeholder="Password" minlength="8" maxlength="16"  formControlName="password" (keydown.space)="$event.preventDefault()">
-                              <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                              <div class="btn btn-outline-secondary" type="button" id="button-addon2">
                                 <i class="fa fa-eye-slash" *ngIf="!showPassword" (click)="toggleShow()"></i>
                                 <i class="fa fa-eye" *ngIf="showPassword" (click)="toggleShow()"></i>
-                              </button>
+                              </div>
             </dd>
             <p *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="validations-p">
               <small *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password
