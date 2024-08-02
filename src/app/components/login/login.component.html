@@ -1,0 +1,52 @@
+<div class="main" (click)="backgroundcolor()" id="dd">
+    <div class="login-wrap">
+      <div class="kv">
+        <form [formGroup]="loginFrom" (ngSubmit)="login()" autocomplete="off" class="ng-untouched ng-pristine ng-invalid">
+          <dl class="login-panel">
+            <dt>Management login</dt>
+            <dd>
+              <input id="userid" type="text" minlength="4" maxlength="12" placeholder="UserId" formControlName="userId" (keydown.space)="$event.preventDefault()"
+                class="ng-untouched ng-pristine ng-invalid">
+            </dd>
+            <p *ngIf="userId?.invalid && (userId?.touched || userId?.dirty)" class="validations-p">
+              <small *ngIf="userId?.errors?.['required']" class="text-danger error-message-place">UserId is
+                  required.</small>
+              <small *ngIf="userId?.errors?.['pattern']" class="text-danger error-message-place">Special
+                  characters are not allowed.</small>
+          </p>
+            <dd>
+              <input id="password" [type]="showPassword? 'text' : 'password' " name="password" placeholder="Password" minlength="8" maxlength="16"  formControlName="password" (keydown.space)="$event.preventDefault()">
+                              <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                                <i class="fa fa-eye-slash" *ngIf="!showPassword" (click)="toggleShow()"></i>
+                                <i class="fa fa-eye" *ngIf="showPassword" (click)="toggleShow()"></i>
+                              </button>
+            </dd>
+            <p *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="validations-p">
+              <small *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password
+                  is required.</small>
+          </p>
+            <dd class="valid-code"><input
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                type="text" maxlength="4" formControlName="validationCode" placeholder="Validation Code"
+                class="ng-untouched ng-pristine ng-invalid">
+                <p *ngIf="validationCodes?.invalid && (validationCodes?.touched || validationCodes?.dirty)"
+                class="validations-p">
+                <small *ngIf="validationCodes?.errors?.['required']"
+                    class="text-danger error-message-place">Validation code is required.</small>
+                <small *ngIf="validationCode?.errors?.['maxLength']"
+                    class="text-danger error-message-place">maxlength should be 4</small>
+            </p>
+                <!----><span id="randomCode"> {{validationCode}}
+              </span></dd>
+            <dd>
+              <button id="loginBtn" type="submit" class="btn-send"[disabled]="loginFrom.invalid" > Login </button>
+              <p style="color: red; font-size: 13px; font-weight: 400;">{{errMsg}}</p>
+              <!-- <p style="color: red; font-size: 13px; font-weight: 400;">{{errMsg}}</p> -->
+  
+            </dd>
+          </dl>
+        </form>
+      </div>
+    </div>
+  </div>
+  

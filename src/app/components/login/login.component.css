@@ -1,0 +1,242 @@
+
+.password-input{
+    width: 45%;
+    border-radius: 6px;
+    border-color: rgb(95, 141, 209);
+  }
+  .main{
+    background: #ffa00c !important;
+  }
+  #dd{
+    background: #1D2C38 !important;
+  }
+  
+  #button-addon2{
+    border: none;
+    color: black;
+    position: absolute;
+    right: 6px;
+    top: 0px;
+    height: 30px;
+    cursor: pointer;
+    padding-top: 6px;
+    padding-left: 0px;
+    padding-right: 16px;
+    padding-bottom: 0px;
+    width: 0px;
+    height: 0px;
+    outline: none;
+  }
+  
+  #button-addon2:hover,#button-addon2:focus{
+    background:transparent;
+    border:none;
+    outline: none;
+    box-shadow: none;
+  }
+  .password-input{
+    width: 45%;
+    border-radius: 6px;
+    border-color: rgb(95, 141, 209);
+  }
+  
+  .login-wrap{
+      position: absolute;
+      top: 15%;
+      left: calc(50% - 540px/2);
+      width: 540px;
+      height: 408px;
+      background-color: rgba(255,255,255,0.8);
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgb(0 0 0 / 50%);
+  }
+  .dd{
+    background-color: red !important;
+  }
+  
+  .login-panel {
+      color: #243a48;
+      margin-left: 110%;
+  }
+  .red{
+    color:red;
+    font-size:15px;
+  }
+  .login-panel dt {
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 10px;
+  }
+  .login-panel dd {
+      position: relative;
+      width: 220px;
+      margin-bottom: 5px;
+  }
+  .login-panel input{
+      width: 100%;
+      height: 33px;
+      font-size: 14px;
+      line-height: 21px;
+      border: 1px solid #aaa;
+      box-shadow: inset 0px 2px 0px 0px rgb(0 0 0 / 10%);
+      margin: 0;
+      border-radius: 5px;
+  }
+  dt {
+      display: block;
+      white-space: nowrap;
+      font-weight: 300;
+  }
+  #randomCode{
+      position: absolute;
+      width: 90px;
+      right: 10px;
+      top: 2px;
+      font-weight: bold;
+      text-align: right;
+      overflow-clip-margin: content-box;
+      overflow: clip;
+      font-size: 21px;
+  }
+  .kv {
+      width: 250px;
+      height: 100%;
+      background: #ffb80c url(/assets/bg-login_wrap.jpg) no-repeat;
+      border-radius: 8px 0 0 8px;
+      padding-top: 20px;
+  }
+  .login-panel{
+      width: 218px;
+      height: 36px;
+      line-height: 36px;
+      font-size: 15.5px;
+      margin-top: 52px;
+  }
+  .btn-send {
+      width: 218px;
+      background-color: #ffa00c;
+      border: 2px solid #cb8009;
+      border-radius: 5px;
+      font-weight: bold;
+      padding-top:1px;
+      padding-bottom: 1px;
+  }
+  input::placeholder {
+      padding: 3.5px;
+  }
+  
+  .must{
+      font-size: 13px;
+      color: #d0021b;
+  }
+  #suspendedB{
+    display:none;
+  }
+  .pass1{
+    margin-left: 47px;
+    padding-right:5px;
+  }
+  .pass2{
+    margin-left: 47px;
+    padding-right:5px;
+  }
+  .cpass{
+    padding-right:5px;
+  }
+  
+  .chbtn{
+    width: 119px;
+    margin-left: 90px;
+    border-radius: 5px;
+    background-color: #ffa00c;
+    border-color: #be7f1a;
+    }
+    #newform input{
+      height: 24px;
+      width: 160px;
+      margin-left: 8px;
+      border-radius: 5px;
+      border: none;
+      border-style: inset;
+      border-width: 1px;
+  }
+  
+  .newform{
+    margin-bottom:20px;
+  }
+  #crs{
+    margin-right:8px;
+  }
+  
+  .error-message-place{
+    position: relative;
+    }
+  .validations-p {
+    margin: 0px;
+    padding-bottom: 5px;
+    line-height: 15px;
+  }
+  
+  .error-message-chnage-password {
+    font-size: 8px;
+    margin: 0;
+    padding: 0;
+    display: block;
+  line-height: 14px;
+  }
+  .error-message-chnage-passwords{
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    line-height: 14px;
+  }
+  .error-message-chnage-passwordd {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    line-height: 14px;
+  }
+  
+  .redPOP{
+    background-color: #d0021b;
+    text-align: center;
+    width: 96%;
+    height: 40px;
+    line-height: 15px;
+  }
+  .redPOP {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+  }
+  .greenPopup{
+    background-color: #66ac1b;
+    text-align: center;
+    width: 96%;
+    height: 40px;
+    line-height: 15px;
+  }
+  .greenPopup {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 9999; /* Make sure the popup appears above other elements */
+  }
+  
+  .colorPop{
+    color: white;
+    font-size: 13px;
+  }
+  p small{
+    color: red;
+    font-size: 12px;
+    margin-right: 6px;
+  }
+  

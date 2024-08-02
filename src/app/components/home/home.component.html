@@ -1,1 +1,152 @@
-<p>home works!</p>
+<!-- <app-navigation></app-navigation> -->
+<div class="div-wrap">
+  <h2>Add Company Marshall</h2>
+  <!-- <form [formGroup]="addMarshalForm" (ngSubmit)="addData()"> -->
+  <form >
+    <div class="add_website_block">
+      <div id="userSearchUl" class="search-wrap">
+        <div class="searchbox">
+          <div class="userid">
+            <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="name"
+              (keydown.space)="$event.preventDefault()" placeholder="Enter Name" required=""
+              class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
+            <!-- <p *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="validations-TTp topPWidth">
+              <small *ngIf="name?.errors?.['required']" class="text-danger error-message-place">name is
+                required.</small>
+              <small *ngIf="name?.errors?.['minlength']">name must be at least 4 characters long</small>
+              <small *ngIf="name?.errors?.['pattern']" class="text-danger error-message-place">Special
+                characters are not allowed.</small>
+            </p> -->
+
+          </div>
+          <div class="userid">
+            <input id="searchUserId" type="text" maxlength="14" minlength="2" formControlName="userId"
+              (keydown.space)="$event.preventDefault()" placeholder="Enter UserId" required=""
+              class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
+            <!-- <p *ngIf=" userId?.invalid && (userId?.touched || userId?.dirty)" class="validations-TTp topPWidth">
+              <small *ngIf="userId?.errors?.['required']" class="text-danger error-message-place">UserId is
+                required.</small>
+              <small *ngIf="userId?.errors?.['minlength']">UserId must be at least 8 characters long</small>
+              <small *ngIf="userId?.errors?.['pattern']" class="text-danger error-message-place">Special
+                characters are not allowed.</small>
+
+
+            </p>
+            <small style="color: red; font-size: 12px; font-weight: bold;">
+              {{ErrMSG}}
+            </small> -->
+
+          </div>
+          <div class="userid">
+            <input id="searchUserId" type="password" minlength="8" maxlength="16" formControlName="password"
+              (keydown.space)="$event.preventDefault()" placeholder="Enter Password" required=""
+              class="search-input searchTB" ng-reflect-required="" ng-reflect-name="name">
+            <!-- <p class="topPWidth">
+              <small *ngIf="password?.errors && password?.errors?.['weakPassword']">
+                One uppercase letter, lowercase letter, digit, and one special character.
+              </small>
+
+            </p>
+
+            <p *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="validations-TTp topPWidth">
+              <small *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password is
+                required</small>
+              <small *ngIf="password?.errors?.['minlength']">Password: min 6 character.</small>
+            </p> -->
+          </div>
+
+        </div>
+      </div><button type="submit" id="search" class="btn-send add_website_btn">Add</button>
+      <!-- <small style="color: red; font-size: 12px; font-weight: bold;">
+        {{ErrMSG}}
+      </small> -->
+    </div>
+  </form>
+  <div>
+    <table class="table">
+      <thead class="tablehead">
+        <tr>
+          <th  id="hWebsiteName1" style="width: 25px;">Sr.No</th>
+          <th  id="hWebsiteName1" style="width: 25px;">Name</th>
+          <th  id="hWebsiteName2" style="width: 30px;">UserID</th>
+          <!-- <th  id="hWebsiteName3">Password</th> -->
+          <th  id="hAction" class="action" >Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="websiteName" class="site" style="width: 20px;">1</td>
+          <td id="websiteName" class="site" style="width: 20px;">user1</td>
+          <td id="websiteName" class="site" style="width: 20px;">abcder</td>
+          <!-- <td id="websiteName" class="site">*******************</td> -->
+          <td id="multiBtn" class="action" >
+            <div class="row"><button class="action_dd" data-toggle="modal" data-target="#myModal">
+                Change Password</button></div>
+          </td>
+        </tr>
+        <!-- <tr *ngFor="let item of marshelList; let i = index">
+          <td id="websiteName" class="site" style="width: 20px;">{{i + 1}}</td>
+          <td id="websiteName" class="site" style="width: 20px;">{{item.name}}</td>
+          <td id="websiteName" class="site" style="width: 20px;">{{item.userId}}</td>
+           <td id="websiteName" class="site">*******************</td> 
+          <td id="multiBtn" class="action" >
+            <div class="row"><button class="action_dd" data-toggle="modal" data-target="#myModal"
+                (click)="getUserId(item._id)">Change
+                Password</button></div>
+          </td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- <div id="myModal" role="dialog" class="modal" aria-modal="true">
+  <div class="modal-dailog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Change Password</h4><i data-dismiss="modal" #closeCreditRef aria-label="Close" (click)="closePopRese()"
+          class="fa-solid fa-square-xmark cross"></i>
+      </div>
+      <div>
+        <form [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()" autocomplete="off"
+          class="change_pass_form ng-untouched ng-pristine ng-invalid">
+          <div class="new-password">
+            <span class="input1 floatL">New Password</span>
+            <div class="inputDiv">
+              <input type="password" placeholder="Enter" autocomplete="false" formControlName="newPassword" minlength="8" maxlength="14" class="input1 ng-untouched ng-pristine ng-invalid">
+            </div>
+              <p class="validations-p1">
+                <small *ngIf="newPassword?.errors && newPassword?.errors?.['weakPassword']">
+                  Uppercase,Lowercase,Number,Special character.
+                </small>
+
+              </p>
+              <p *ngIf="newPassword?.invalid && (newPassword?.touched || newPassword?.dirty)" class="validations-p2">
+                <small *ngIf="newPassword?.errors?.['required']" class="text-danger error-message-place">newPassword is required</small>
+                <small *ngIf="newPassword?.errors?.['minlength']">New Password : min 6 character.</small>
+              </p>
+          </div>
+          <div class="confirmPassword">
+            <span class="conform-new-password floatL">Confirm Password</span>
+            <div class="inputDiv">
+              <input type="password" autocomplete="false" placeholder="Enter" formControlName="confirmPassword" autocomplete="false" minlength="8" maxlength="14" class="ng-untouched ng-pristine ng-invalid">
+            </div>
+          </div>
+          <div class="old-password">
+            <span class="input1 floatL">Your Password</span>
+            <div class="inputDiv">
+              <input type="password" placeholder="Enter" autocomplete="false" autocomplete="false" formControlName="currentPassword" minlength="6" maxlength="16" class="ng-untouched ng-pristine ng-invalid">
+            </div>
+          </div>
+          <div style="text-align: center; margin-top: 13px;">
+            <span style="color: red; font-size: 12px; font-weight: 400;">{{confirmPasswordErr}}</span>
+          </div>
+          <div class="change_btn_box"><button type="submit" class="btn btn-primary changebtn"
+             >Change</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader *ngIf="isLoading"></app-loader> -->
