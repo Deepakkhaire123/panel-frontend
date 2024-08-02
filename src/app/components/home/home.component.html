@@ -6,7 +6,7 @@
       <div id="userSearchUl" class="search-wrap">
         <div class="searchbox">
           <div class="userid">
-            <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="username"
+            <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="name"
               (keydown.space)="$event.preventDefault()" placeholder="Enter Name" required=""
               class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
             <!-- <p *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="validations-TTp topPWidth">
@@ -61,7 +61,7 @@
             </select>
           </div>
           <div class="business-panel">
-            <select class="business-option" formControlName="userType">
+            <select class="business-option" formControlName="panelFor">
                 <option value="">Choose User</option>
                 <option value="AGENT">Agent</option>
                 <option value="USER">User</option>
@@ -87,30 +87,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td id="websiteName" class="site" >1</td>
-          <td id="websiteName" class="site" >user1</td>
-          <td id="websiteName" class="site" >abcder</td>
-          <td id="websiteName" class="site">B2C</td>
-          <td id="websiteName" class="site">Agnet</td>
+        <tr *ngFor="let list of showPanelList; let i = index">
+          <td id="websiteName" class="site" >{{i + 1}}</td>
+          <td id="websiteName" class="site" >{{list?.name}}</td>
+          <td id="websiteName" class="site" >{{list?.userId}}</td>
+          <td id="websiteName" class="site">{{list?.business}}</td>
+          <td id="websiteName" class="site">{{list?.panelFor}}</td>
           <td id="multiBtn" class="action" >
             <div class="row">
-                <button class="action_dd" data-toggle="modal" data-target="#myModal" routerLink="/website-list">
+                <button class="action_dd" data-toggle="modal" data-target="#myModal" routerLink="/website-list/{{list?._id}}">
                 Add Website</button>
             </div>
           </td>
         </tr>
-        <!-- <tr *ngFor="let item of marshelList; let i = index">
-          <td id="websiteName" class="site" style="width: 20px;">{{i + 1}}</td>
-          <td id="websiteName" class="site" style="width: 20px;">{{item.name}}</td>
-          <td id="websiteName" class="site" style="width: 20px;">{{item.userId}}</td>
-           <td id="websiteName" class="site">*******************</td> 
-          <td id="multiBtn" class="action" >
-            <div class="row"><button class="action_dd" data-toggle="modal" data-target="#myModal"
-                (click)="getUserId(item._id)">Change
-                Password</button></div>
-          </td>
-        </tr> -->
+       
       </tbody>
     </table>
   </div>

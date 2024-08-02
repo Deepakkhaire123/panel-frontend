@@ -1,12 +1,11 @@
 <div class="div-wrap">
-    <h2>Add Mother Panel</h2>
-    <!-- <form [formGroup]="addMarshalForm" (ngSubmit)="addData()"> -->
-    <form >
+    <h2>Add Website</h2>
+    <form [formGroup]="addWebsite" (ngSubmit)="addData()">
       <div class="add_website_block">
         <div id="userSearchUl" class="search-wrap">
           <div class="searchbox">
             <div class="userid">
-              <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="name"
+              <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="websiteURL"
                 (keydown.space)="$event.preventDefault()" placeholder="Enter website" required=""
                 class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
               <!-- <p *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="validations-TTp topPWidth">
@@ -32,12 +31,14 @@
           <tr>
             <th  id="hWebsiteName1" >Sr.No</th>
             <th  id="hWebsiteName2" >Website</th>
+            <th  id="hWebsiteName2" >Panel Name</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td id="websiteName" class="site" >1</td>
-            <td id="websiteName" class="site" >user1</td>
+          <tr *ngFor="let list of showWebList; let i = index">
+            <td id="websiteName" class="site" >{{i + 1}}</td>
+            <td id="websiteName" class="site" >{{list?.websiteURL}}</td>
+            <td id="websiteName" class="site" >{{list?.motherPanelId?.name}}</td>
            
           </tr>
           <!-- <tr *ngFor="let item of marshelList; let i = index">
