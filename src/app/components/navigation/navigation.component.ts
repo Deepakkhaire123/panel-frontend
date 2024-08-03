@@ -13,8 +13,11 @@ export class NavigationComponent implements OnInit{
   userId=localStorage.getItem("userId")
   @ViewChild('closeCreditRef') closeCreditRef: any;
   confirmPasswordErr:string=''
+  userID : any;
+
   constructor(private apiService:ApiService){}
   ngOnInit(): void {
+    this.userID = localStorage.getItem('userId')
   }
 
 
@@ -76,6 +79,7 @@ export class NavigationComponent implements OnInit{
   }
 
   logout(){
+    this.apiService.logout();
   }
 
   closePopRese(){

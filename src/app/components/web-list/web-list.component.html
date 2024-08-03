@@ -1,3 +1,4 @@
+<app-navigation></app-navigation>
 <div class="div-wrap">
     <h2>Add Website</h2>
     <form [formGroup]="addWebsite" (ngSubmit)="addData()">
@@ -32,6 +33,8 @@
             <th  id="hWebsiteName1" >Sr.No</th>
             <th  id="hWebsiteName2" >Website</th>
             <th  id="hWebsiteName2" >Panel Name</th>
+            <th  id="hWebsiteName2" >Business</th>
+            <th  id="hWebsiteName2" >Panel User</th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +42,8 @@
             <td id="websiteName" class="site" >{{i + 1}}</td>
             <td id="websiteName" class="site" >{{list?.websiteURL}}</td>
             <td id="websiteName" class="site" >{{list?.motherPanelId?.name}}</td>
+            <td id="websiteName" class="site" >{{list?.motherPanelId?.business}}</td>
+            <td id="websiteName" class="site" >{{list?.motherPanelId?.panelFor}}</td>
            
           </tr>
           <!-- <tr *ngFor="let item of marshelList; let i = index">

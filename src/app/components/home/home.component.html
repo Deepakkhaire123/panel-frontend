@@ -1,4 +1,4 @@
-<!-- <app-navigation></app-navigation> -->
+<app-navigation></app-navigation>
 <div class="div-wrap">
   <h2>Add Mother Panel</h2>
   <form [formGroup]="addDetails" (ngSubmit)="addData()">
@@ -95,10 +95,14 @@
           <td id="websiteName" class="site">{{list?.business}}</td>
           <td id="websiteName" class="site">{{list?.panelFor}}</td>
           <td id="multiBtn" class="action" >
-            <div class="row">
-                <button class="action_dd" data-toggle="modal" data-target="#myModal" routerLink="/website-list/{{list?._id}}">
-                Add Website</button>
-            </div>
+            <button class="action_dd" data-toggle="modal" data-target="#myModal" routerLink="/website-list/{{list?._id}}">
+            Add Website</button>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#myModal" >
+            Edit</button>
+            <button class="btn btn-danger mx-2" data-toggle="modal" data-target="#myModal" >
+            Delete</button>
+            <button class="btn btn-secondary" data-toggle="modal" data-target="#myModal" >
+            Change Password</button>
           </td>
         </tr>
        

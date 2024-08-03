@@ -1,27 +1,30 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginFrom:any
+  loginFrom: any
   validationCode: any;
   errMsg: string = '';
   errMsg2: any;
-  showPassword :any;  
+  showPassword: any;
 
+  constructor(private apiServe: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.backgroundcolor()
-    this.loginFrom=new FormGroup({
-      userId:new FormControl('', [
+    this.loginFrom = new FormGroup({
+      userId: new FormControl('', [
         Validators.required,
         Validators.pattern(/^[a-zA-Z0-9_.-]*$/),
       ]),
-      password:new FormControl('',Validators.required),
-      validationCode:new FormControl('',[
+      password: new FormControl('', Validators.required),
+      validationCode: new FormControl('', [
         Validators.required,
         Validators.maxLength(4),
         Validators.pattern(/^[0-9]{1,4}$/),
@@ -48,37 +51,41 @@ export class LoginComponent implements OnInit {
   }
 
 
-  login(){
+  login() {
+    console.log(this.validationCode, this.loginFrom.value.validationCode);
+    
     if ((this.validationCode === +this.loginFrom.value.validationCode)) {
-      // this.apiService.login(this.loginFrom.value);
-      this.errMsg2=localStorage.getItem("errors")
-
-      this.ngOnInit()
-      this.loginFrom.reset();
-    }else{
-      this.errMsg = "Invalid Validation Code"
-
+      this.apiServe.loginUser(this.loginFrom.value).subscribe((res: any) => {
+        console.log(res, 'response');
+        localStorage.setItem('token', res.data.token)
+        localStorage.setItem("userId", res.data.userId)
+        this.router.navigate(['/home'])
+        setTimeout(() => {
+          window.location.reload();
+        }, 200);
+      }, (error => {
+        this.errMsg = error.error.message
+      }))
     }
 
-    // this.errMsg2=localStorage.getItem("errors")
-
-    // console.log(this.loginFrom.value,"lllllllllllllllllllllll");
-    // this.apiService.login(this.loginFrom.value)
+    setTimeout(() => {
+      this.errMsg = '';
+    }, 3000);
 
   }
 
-  backgroundcolor(){
+  backgroundcolor() {
     document.body.style.backgroundColor = "#1D2C38";
   }
-  numberOnly(event: any):any {
+  numberOnly(event: any): any {
     var regex = new RegExp("^[a-zA-Z0-9]+$");
     var regex2 = new RegExp(/^[0-9]{1,4}$/);
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
     if (!regex.test(key)) {
-       event.preventDefault();
-       return false;
+      event.preventDefault();
+      return false;
     }
-    if(!regex2.test(key)){
+    if (!regex2.test(key)) {
       event.preventDefault();
       return false;
     }
@@ -88,7 +95,7 @@ export class LoginComponent implements OnInit {
     this.validationCode = val;
   }
 
-  toggleShow(){
+  toggleShow() {
     this.showPassword = !this.showPassword;
   }
 

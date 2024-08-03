@@ -25,10 +25,9 @@
               <small *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password
                   is required.</small>
           </p>
-            <dd class="valid-code"><input
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                type="text" maxlength="4" formControlName="validationCode" placeholder="Validation Code"
-                class="ng-untouched ng-pristine ng-invalid">
+            <dd class="valid-code"><input type="text" maxlength="4" formControlName="validationCode" placeholder="Validation Code"
+                class="ng-untouched ng-pristine ng-invalid" (paste)="numberOnly($event)" (focus)="numberOnly($event)" (keypress)="numberOnly($event)"
+                (input)="numberOnly($event)">
                 <p *ngIf="validationCodes?.invalid && (validationCodes?.touched || validationCodes?.dirty)"
                 class="validations-p">
                 <small *ngIf="validationCodes?.errors?.['required']"
@@ -39,9 +38,8 @@
                 <!----><span id="randomCode"> {{validationCode}}
               </span></dd>
             <dd>
-              <button id="loginBtn" type="submit" class="btn-send"[disabled]="loginFrom.invalid" > Login </button>
+              <button id="loginBtn" type="submit" class="btn-send"> Login </button>
               <p style="color: red; font-size: 13px; font-weight: 400;">{{errMsg}}</p>
-              <!-- <p style="color: red; font-size: 13px; font-weight: 400;">{{errMsg}}</p> -->
   
             </dd>
           </dl>
