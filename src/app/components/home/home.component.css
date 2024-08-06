@@ -810,3 +810,27 @@ small {
   position: relative;
   margin-bottom: 0.5rem;
 }
+
+#button-addon2{
+  border: none;
+  color: black;
+  position: absolute;
+  right: 6px;
+  top: 0px;
+  height: 30px;
+  cursor: pointer;
+  padding-top: 6px;
+  padding-left: 0px;
+  padding-right: 16px;
+  padding-bottom: 0px;
+  width: 0px;
+  height: 0px;
+  outline: none;
+}
+
+#button-addon2:hover,#button-addon2:focus{
+  background:transparent;
+  border:none;
+  outline: none;
+  box-shadow: none;
+}

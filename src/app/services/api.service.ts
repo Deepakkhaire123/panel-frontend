@@ -40,15 +40,12 @@ export class ApiService {
     return this.http.put(`${this.baseUrl}/api/v1/panel/change-panel-password/${id}`, payload)
   }
 
-  updatePanel(id : any){
-    return this.http.delete(`${this.baseUrl}/api/v1/panel/update-mother-panel/${id}`)
+  updatePanel(id : string, payload: any){
+    return this.http.put(`${this.baseUrl}/api/v1/panel/update-panel-name/${id}`, payload)
   }
 
   deletePanel(id : any){
     return this.http.delete(`${this.baseUrl}/api/v1/panel/delete-panel/${id}`)
   }
 
-
-
-  
 }

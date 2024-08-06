@@ -51,21 +51,25 @@
 
           </div>
           <div class="userid">
-            <input id="searchUserId" type="password" minlength="8" maxlength="16" formControlName="password"
-              (keydown.space)="$event.preventDefault()" placeholder="Enter Password" required=""
-              class="search-input searchTB" ng-reflect-required="" ng-reflect-name="name">
-            <!-- <p class="topPWidth">
-              <small *ngIf="password?.errors && password?.errors?.['weakPassword']">
-                One uppercase letter, lowercase letter, digit, and one special character.
-              </small>
+              <input id="searchUserId" [type]="showPassword? 'text' : 'password'" minlength="8" maxlength="16" formControlName="password"
+                (keydown.space)="$event.preventDefault()" placeholder="Enter Password" required=""
+                class="search-input searchTB" ng-reflect-required="" ng-reflect-name="name">
+              <!-- <p class="topPWidth">
+                <small *ngIf="password?.errors && password?.errors?.['weakPassword']">
+                  One uppercase letter, lowercase letter, digit, and one special character.
+                </small>
 
-            </p>
+              </p>
 
-            <p *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="validations-TTp topPWidth">
-              <small *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password is
-                required</small>
-              <small *ngIf="password?.errors?.['minlength']">Password: min 6 character.</small>
-            </p> -->
+              <p *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="validations-TTp topPWidth">
+                <small *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password is
+                  required</small>
+                <small *ngIf="password?.errors?.['minlength']">Password: min 6 character.</small>
+              </p> -->
+              <div class="btn btn-outline-secondary" type="button" id="button-addon2">
+                <i class="fa fa-eye-slash" *ngIf="!showPassword" (click)="toggleShow()"></i>
+                <i class="fa fa-eye" *ngIf="showPassword" (click)="toggleShow()"></i>
+              </div>
           </div>
 
 
@@ -109,6 +113,7 @@
           <th id="hWebsiteName3">UserID</th>
           <th id="hWebsiteName3">Business</th>
           <th id="hWebsiteName3">Panel for</th>
+          <th id="hWebsiteName3">Password</th>
           <th id="hAction" class="action">Action</th>
         </tr>
       </thead>
@@ -119,11 +124,12 @@
           <td id="websiteName" class="site">{{list?.userId}}</td>
           <td id="websiteName" class="site">{{list?.business}}</td>
           <td id="websiteName" class="site">{{list?.panelFor}}</td>
+          <td id="websiteName" class="site">{{list?.password}}</td>
           <td id="multiBtn" class="action">
             <button class="action_dd" data-toggle="modal" data-target="#myModal"
               routerLink="/website-list/{{list?._id}}">
               Add Website</button>
-            <button class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+            <button class="btn btn-warning" data-toggle="modal" (click)="updatePanelName(list?._id)" data-target="#myModal">
               Edit</button>
             <button class="btn btn-danger mx-2" (click)="deletePostPop(list?._id)">
               Delete</button>
@@ -145,17 +151,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Update Panel</h5>
-        <i class="fa fa-window-close close-icon" aria-hidden="true" data-dismiss="modal"></i>
+        <i class="fa fa-window-close close-icon" aria-hidden="true" #closeRef data-dismiss="modal"></i>
       </div>
       <div class="modal-body">
-        <!-- <form [formGroup]="updateArticalsForm" (ngSubmit)="updateArticalesdata()"> -->
-        <form>
+        <form [formGroup]="updatePanelForm" (ngSubmit)="updatePanelData()">
           <div class="popinput">
             <div>
               <p>Panel Name</p>
               <input #inputBox1 type="text" [(ngModel)]="inputText1"
-                minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="article"
-                placeholder="Enter Article">
+                minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="panelName"
+                placeholder="Enter Panel Name">
             </div>
             <button type="submit" class="btn btn-success">Save changes</button>
           </div>
@@ -173,7 +178,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title chnagePass">Change Password</h4>
-        <i class="fa fa-window-close close-icon" aria-hidden="true" data-dismiss="modal"></i>
+        <i class="fa fa-window-close close-icon" aria-hidden="true" #closeRefa data-dismiss="modal"></i>
       </div>
       <div>
         <form [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()" autocomplete="off"

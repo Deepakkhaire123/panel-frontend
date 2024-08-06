@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { passwordValidator } from 'src/app/services/password.validators';
@@ -7,56 +7,71 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('closeRef') closeRef: any;
+  @ViewChild('closeRefa') closeRefa: any;
   addDetails: any;
   showPanelList: any;
   changePasswordForm: any;
   inputText1: string = '';
   cursorPosition1: number = 0;
-  panelId : any;
+  panelId: any;
   errMsg = '';
   drpdwn = false;
-  constructor(private apiServe: ApiService) { }
+  updatePanelForm: any;
+  showPassword: any;
+  constructor(private apiServe: ApiService) {}
 
   ngOnInit(): void {
     this.backgroundcolor();
     this.addDetails = new FormGroup({
       name: new FormControl('', Validators.required),
-      userId: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9_.-]*$/)]),
+      userId: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9_.-]*$/),
+      ]),
       password: new FormControl('', Validators.required),
       business: new FormControl('', Validators.required),
       panelFor: new FormControl('', Validators.required),
-    })
-    this.getPanels()
+    });
+    this.getPanels();
 
     this.changePasswordForm = new FormGroup({
-      newPassword: new FormControl('', [Validators.required, passwordValidator()]),
-      confirmPassword: new FormControl('', [Validators.required, passwordValidator()]),
-      currentPassword: new FormControl('', Validators.required)
+      newPassword: new FormControl('', [
+        Validators.required,
+        passwordValidator(),
+      ]),
+      confirmPassword: new FormControl('', [
+        Validators.required,
+        passwordValidator(),
+      ]),
+      currentPassword: new FormControl('', Validators.required),
+    });
 
-    })
+    this.updatePanelForm = new FormGroup({
+      panelName: new FormControl('', [Validators.required]),
+    });
   }
 
   getPanels() {
     this.apiServe.getPanels().subscribe((res: any) => {
       this.showPanelList = res?.data;
-    })
+    });
   }
   addData() {
     console.log(this.addDetails.value);
     this.apiServe.addPanels(this.addDetails.value).subscribe((res: any) => {
       if (res) {
-        this.showAlert1('Panel added Successfully')
-        this.getPanels()
+        this.showAlert1('Panel added Successfully');
+        this.getPanels();
       }
-    })
+    });
   }
   updateCursorPosition1(event: any) {
     this.cursorPosition1 = event.target.selectionStart;
   }
-
 
   get currentPassword() {
     return this.changePasswordForm.get('currentPassword');
@@ -67,24 +82,36 @@ export class HomeComponent implements OnInit {
   get confirmPassword() {
     return this.changePasswordForm.get('confirmPassword');
   }
-  changePassword(id : any){
+  changePassword(id: any) {
     this.panelId = id;
   }
   updatePassword() {
-    console.log(this.changePasswordForm.value.newPassword === this.changePasswordForm.value.confirmPassword);
-    if (this.changePasswordForm.value.newPassword === this.changePasswordForm.value.confirmPassword) {
+    console.log(
+      this.changePasswordForm.value.newPassword ===
+        this.changePasswordForm.value.confirmPassword
+    );
+    if (
+      this.changePasswordForm.value.newPassword ===
+      this.changePasswordForm.value.confirmPassword
+    ) {
       let data = {
-        "currentPassword": this.changePasswordForm.value.currentPassword,
-        "newPassword": this.changePasswordForm.value.newPassword
-      }
+        currentPassword: this.changePasswordForm.value.currentPassword,
+        newPassword: this.changePasswordForm.value.newPassword,
+      };
       console.log(data, this.panelId);
-      this.apiServe.changePanelPassword(this.panelId,data).subscribe((res : any)=>{
-        this.changePasswordForm.reset();
-      },(error) =>{
-        this.errMsg = error.error.message;
-      })
+      this.apiServe.changePanelPassword(this.panelId, data).subscribe(
+        (res: any) => {
+          this.changePasswordForm.reset();
+          this.showAlert1('Password updated Successfully');
+          this.getPanels();
+          this.closeRefa.nativeElement.click();
+        },
+        (error) => {
+          this.errMsg = error.error.message;
+        }
+      );
     } else {
-      this.errMsg = 'New Password and Confirm Password are not Matched'
+      this.errMsg = 'New Password and Confirm Password are not Matched';
     }
 
     setTimeout(() => {
@@ -92,24 +119,24 @@ export class HomeComponent implements OnInit {
     }, 3000);
   }
 
-  openDropdown(){
-    this.drpdwn = !this.drpdwn
+  openDropdown() {
+    this.drpdwn = !this.drpdwn;
   }
   backgroundcolor() {
-    document.body.style.backgroundColor = "#fff";
+    document.body.style.backgroundColor = '#fff';
   }
- 
+
   // sweetalert
   showAlert1(message: any) {
     const swalWithStyle = Swal.mixin({
       customClass: {
-        popup: 'my-custom-popup'
-      }
+        popup: 'my-custom-popup',
+      },
     });
     swalWithStyle.fire({
       width: 400,
       color: '#000',
-      icon: "success",
+      icon: 'success',
       title: message,
       timer: 3000,
     });
@@ -131,13 +158,13 @@ export class HomeComponent implements OnInit {
   showAlert2(message: any) {
     const swalWithStyle = Swal.mixin({
       customClass: {
-        popup: 'my-custom-popup'
-      }
+        popup: 'my-custom-popup',
+      },
     });
     swalWithStyle.fire({
       width: 400,
       color: '#000',
-      icon: "error",
+      icon: 'error',
       title: message,
       timer: 3000,
     });
@@ -162,23 +189,52 @@ export class HomeComponent implements OnInit {
     //   topicId: topicId
     // }
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, Delete it!"
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, Delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
         this.apiServe.deletePanel(panelId).subscribe((res: any) => {
           if (res) {
-            this.showAlert1("Topic Deleted Successfully")
+            this.showAlert1('Panel Deleted Successfully');
             this.getPanels();
           }
-        })
+        });
       }
     });
+  }
 
+  updatePanelName(id: string) {
+    this.panelId = id;
+  }
+
+  updatePanelData() {
+    const payload = {
+      name: this.updatePanelForm.value.panelName,
+    };
+
+    this.apiServe.updatePanel(this.panelId, payload).subscribe(
+      (res: any) => {
+        if (res) {
+          this.showAlert1('Panel Updated Successfully!');
+          this.updatePanelForm.reset();
+          this.getPanels();
+          this.closeRef.nativeElement.click();
+        }
+      },
+      (error) => {
+        this.showAlert2(error.error.msg);
+      }
+    );
+
+    console.log(payload);
+  }
+
+  toggleShow() {
+    this.showPassword = !this.showPassword;
   }
 }
