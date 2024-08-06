@@ -1,24 +1,24 @@
 <app-navigation></app-navigation>
 <div class="div-wrap">
   <h2>Add Mother Panel</h2>
-  <form [formGroup]="addDetails" (ngSubmit)="addData()">
+  <form [formGroup]="addDetails" (ngSubmit)="addData()" class="form-content">
     <div class="add_website_block">
       <div id="userSearchUl" class="search-wrap">
         <div class="searchbox">
-            <div class="business-panel">
-                <select  class="business-option" formControlName="business">
-                    <option value="">Choose Business</option>
-                    <option value="B2B">B2B</option>
-                    <option value="B2C">B2C</option>
-                </select>
-              </div>
-              <div class="business-panel">
-                <select class="business-option" formControlName="panelFor">
-                    <option value="">Choose User</option>
-                    <option value="AGENT">Agent</option>
-                    <option value="USER">User</option>
-                </select>
-              </div>
+          <div class="business-panel">
+            <select class="business-option" formControlName="business">
+              <option value="">Choose Business</option>
+              <option value="B2B">B2B</option>
+              <option value="B2C">B2C</option>
+            </select>
+          </div>
+          <div class="business-panel">
+            <select class="business-option" formControlName="panelFor">
+              <option value="">Choose User</option>
+              <option value="AGENT">Agent</option>
+              <option value="USER">User</option>
+            </select>
+          </div>
           <div class="userid">
             <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="name"
               (keydown.space)="$event.preventDefault()" placeholder="Enter Name" required=""
@@ -67,47 +67,157 @@
               <small *ngIf="password?.errors?.['minlength']">Password: min 6 character.</small>
             </p> -->
           </div>
-          
+
+
         </div>
-      </div><button type="submit" id="search" class="btn-send add_website_btn">Add</button>
-      <!-- <small style="color: red; font-size: 12px; font-weight: bold;">
-        {{ErrMSG}}
-      </small> -->
+      </div>
+      <button type="submit" id="search" class="btn-send add_website_btn">Add</button>
+    </div>
+    <div class="show-list">
+      <div class="business-panel">
+        <select class="business-option" formControlName="business">
+          <option value="">Choose Business</option>
+          <option value="B2B">B2B</option>
+          <option value="B2C">B2C</option>
+        </select>
+      </div>
+      <div class="action-div">
+        <div>
+          <div class="dropdown">
+            <button class="dropdown-btn" type="button" (click)="openDropdown()">Select Options </button>
+            <div class="dropdown-content drpdwn" [class]="drpdwn ? 'show' : 'hide'">
+
+              <label>
+                <span style="float: left;">user </span>
+                <!-- <input type="checkbox" [value]="item._id" (click)="defaultOption(item._id)"
+                [checked]="defaultDomin(item._id)" style="float: right;width: 20px;" /> -->
+                <input type="checkbox" [value]="" checked style="float: right;width: 20px;" />
+              </label>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </form>
   <div>
     <table class="table">
       <thead class="tablehead">
         <tr>
-          <th  id="hWebsiteName1" >Sr.No</th>
-          <th  id="hWebsiteName2" >Name</th>
-          <th  id="hWebsiteName3" >UserID</th>
-          <th  id="hWebsiteName3">Business</th>
-          <th  id="hWebsiteName3">Panel for</th>
-          <th  id="hAction" class="action" >Action</th>
+          <th id="hWebsiteName1">Sr.No</th>
+          <th id="hWebsiteName2">Name</th>
+          <th id="hWebsiteName3">UserID</th>
+          <th id="hWebsiteName3">Business</th>
+          <th id="hWebsiteName3">Panel for</th>
+          <th id="hAction" class="action">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let list of showPanelList; let i = index">
-          <td id="websiteName" class="site" >{{i + 1}}</td>
-          <td id="websiteName" class="site" >{{list?.name}}</td>
-          <td id="websiteName" class="site" >{{list?.userId}}</td>
+          <td id="websiteName" class="site">{{i + 1}}</td>
+          <td id="websiteName" class="site">{{list?.name}}</td>
+          <td id="websiteName" class="site">{{list?.userId}}</td>
           <td id="websiteName" class="site">{{list?.business}}</td>
           <td id="websiteName" class="site">{{list?.panelFor}}</td>
-          <td id="multiBtn" class="action" >
-            <button class="action_dd" data-toggle="modal" data-target="#myModal" routerLink="/website-list/{{list?._id}}">
-            Add Website</button>
-            <button class="btn btn-warning" data-toggle="modal" data-target="#myModal" >
-            Edit</button>
-            <button class="btn btn-danger mx-2" data-toggle="modal" data-target="#myModal" >
-            Delete</button>
-            <button class="btn btn-secondary" data-toggle="modal" data-target="#myModal" >
-            Change Password</button>
+          <td id="multiBtn" class="action">
+            <button class="action_dd" data-toggle="modal" data-target="#myModal"
+              routerLink="/website-list/{{list?._id}}">
+              Add Website</button>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+              Edit</button>
+            <button class="btn btn-danger mx-2" (click)="deletePostPop(list?._id)">
+              Delete</button>
+            <button class="btn btn-secondary" (click)="changePassword(list?._id)" data-toggle="modal"
+              data-target="#changePass">
+              Change Password</button>
           </td>
         </tr>
-       
+
       </tbody>
     </table>
   </div>
 </div>
 
+<!-- update panel popup -->
+<!-- Modal -->
+<div class="modal" id="myModal" role="dialog" class="modal" aria-modal="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Panel</h5>
+        <i class="fa fa-window-close close-icon" aria-hidden="true" data-dismiss="modal"></i>
+      </div>
+      <div class="modal-body">
+        <!-- <form [formGroup]="updateArticalsForm" (ngSubmit)="updateArticalesdata()"> -->
+        <form>
+          <div class="popinput">
+            <div>
+              <p>Panel Name</p>
+              <input #inputBox1 type="text" [(ngModel)]="inputText1"
+                minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="article"
+                placeholder="Enter Article">
+            </div>
+            <button type="submit" class="btn btn-success">Save changes</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change password popup -->
+
+<div id="changePass" role="dialog" class="modal" aria-modal="true">
+  <div class="modal-dailog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title chnagePass">Change Password</h4>
+        <i class="fa fa-window-close close-icon" aria-hidden="true" data-dismiss="modal"></i>
+      </div>
+      <div>
+        <form [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()" autocomplete="off"
+          class="change_pass_form ng-untouched ng-pristine ng-invalid">
+          <div class="new-password"><span class="input1">New
+              Password</span><input type="password" placeholder="Enter" autocomplete="false"
+              formControlName="newPassword" minlength="8" maxlength="14"
+              class="input1 ng-untouched ng-pristine ng-invalid inp1"><span class="must">*</span><!---->
+            <!-- <p class="validations-p">
+                  <small *ngIf="newPassword?.errors && newPassword?.errors?.['weakPassword']">
+                    Uppercase,Lowercase,Number,Special character.
+                  </small>
+                </p>
+                <p *ngIf="newPassword?.invalid && (newPassword?.touched || newPassword?.dirty)" class="validations-p">
+                  <small *ngIf="newPassword?.errors?.['required']" class="text-danger error-message-place">newPassword is
+                    required</small>
+                  <small *ngIf="newPassword?.errors?.['minlength']">New Password : min 6 character.</small>
+                </p> -->
+          </div>
+          <div class="confirmPassword"><span class="conform-new-password">Confirm Password
+            </span><input type="password" placeholder="Enter" formControlName="confirmPassword" autocomplete="false"
+              minlength="8" maxlength="14" class="ng-untouched ng-pristine ng-invalid inp2"><span class="must">*</span>
+            <!-- <p class="validations-p">
+                    <small *ngIf="confirmPassword?.errors && confirmPassword?.errors?.['weakPassword']">
+                      Uppercase,Lowercase,Number,Special character.
+                    </small>
+                  </p>
+                  <p *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)" class="validations-p">
+                    <small *ngIf="confirmPassword?.errors?.['required']" class="text-danger error-message-place">confirmPassword is
+                      required</small>
+                    <small *ngIf="confirmPassword?.errors?.['minlength']">New Password : min 6 character.</small>
+                  </p> -->
+          </div>
+          <div class="old-password"><span class="input1">Your Password
+            </span><input type="password" placeholder="Enter" autocomplete="false" formControlName="currentPassword"
+              minlength="8" maxlength="14" class="ng-untouched ng-pristine ng-invalid inp3"><span
+              class="must">*</span><!----></div>
+          <div style="text-align: center; margin-top: 13px;">
+          </div>
+          <span style="color: red; font-size: 12px; font-weight: 400;">{{errMsg}}</span>
+
+          <div class="change_btn_box"><button type="submit" class="btn btn-primary changebtn">Change</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

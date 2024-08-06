@@ -663,3 +663,150 @@
     border-radius: 8px;
 }
   
+
+/* custom-dropdown.component.css */
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .custom-select {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #a89e9e;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .custom-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    z-index: 1000;
+  }
+  
+  .custom-option {
+    padding: 0 10px;
+    cursor: pointer;
+    list-style: none;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    max-width: 100%; 
+  }
+  
+  .custom-option:hover {
+    background-color: #f1f1f1;
+  }
+
+  
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .dropdown-btn {
+    /* color: white; */
+    background: white;
+    padding: 3px 8px;
+    border: 1px solid #a89e9e;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    /* min-width: 160px; */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 10px;
+    width: 154px;
+  }
+  
+  .dropdown-content label {
+    display: block;
+  }
+  
+  .dropdown-content.show {
+    display: block;
+  }
+  
+  .dropdown-content label {
+    display: flex;
+    justify-content: space-between;
+  }
+  .action-div{
+    margin-left: 10px;
+  }
+  .form-content{
+    display: flex;
+    justify-content: space-between;
+  }
+  .show-list{
+    display: flex;
+    align-items: center;
+  }
+  .popinput{
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .popinput input {
+    width: 100%;
+    border-color: #000;
+    height: 33px;
+    margin-bottom: 15px;
+  }
+  .close-icon{
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .chnagePass{
+    font-size: 16px !important;
+    margin-left: 1.5rem;
+  }
+.validations-p{
+  margin-bottom: 0;
+  padding-left: 11rem;
+}
+.confirmPassword{
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+.inp1{
+  margin-left: 4.9rem !important;
+}
+.inp2{
+  margin-left: 3.1rem !important;
+}
+.inp3{
+  margin-left: 4.6rem !important;
+}
+small {
+  color: red;
+}
+.new-password {
+  position: relative;
+  margin-bottom: 0.5rem;
+}

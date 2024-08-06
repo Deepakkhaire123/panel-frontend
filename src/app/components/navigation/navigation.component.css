@@ -475,16 +475,16 @@
     margin-bottom: 0.5rem;
   }
   .inp1{
-    margin-left: 4.9rem;
-    padding-left: 1rem;
+    margin-left: 4.9rem !important;
+    padding-left: 1rem !important;
   }
   .inp2{
-    margin-left: 3.1rem;
-    padding-left: 1rem;
+    margin-left: 3.1rem !important;
+    padding-left: 1rem !important;
   }
   .inp3{
-    margin-left: 4.6rem;
-    padding-left: 1rem;
+    margin-left: 4.6rem !important;
+    padding-left: 1rem !important;
   }
   small {
     color: red;
@@ -501,4 +501,7 @@
   .dropdown-content{
     position: relative;
     z-index: 99;
+  }
+  .dropdown-content{
+    cursor: pointer;
   }

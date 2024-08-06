@@ -13,14 +13,17 @@ export class ApiService {
   loginUser(obj : any){
     return this.http.post(`${this.baseUrl}/api/v1/auth/login`,obj)
   }
+
   logout() {
     localStorage.removeItem('token');
     localStorage.clear()
     this.router.navigate(['/login'])
   }
+
   addPanels(obj : any){
     return this.http.post(`${this.baseUrl}/api/v1/panel/add-panel`,obj)
   }
+
   addWebsite(obj : any){
     return this.http.post(`${this.baseUrl}/api/v1/panel/add-website`,obj)
   }
@@ -32,6 +35,20 @@ export class ApiService {
   getWebsites(id : any){
     return this.http.get(`${this.baseUrl}/api/v1/panel/panel-websites/${id}`)
   }
+
+  changePanelPassword(id : any, payload : any){
+    return this.http.put(`${this.baseUrl}/api/v1/panel/change-panel-password/${id}`, payload)
+  }
+
+  updatePanel(id : any){
+    return this.http.delete(`${this.baseUrl}/api/v1/panel/update-mother-panel/${id}`)
+  }
+
+  deletePanel(id : any){
+    return this.http.delete(`${this.baseUrl}/api/v1/panel/delete-panel/${id}`)
+  }
+
+
 
   
 }

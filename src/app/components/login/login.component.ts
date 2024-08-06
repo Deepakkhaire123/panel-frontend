@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { passwordValidator } from 'src/app/services/password.validators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,25 +20,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.backgroundcolor()
     this.loginFrom = new FormGroup({
-      userId: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z0-9_.-]*$/),
-      ]),
-      password: new FormControl('', Validators.required),
-      validationCode: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(4),
-        Validators.pattern(/^[0-9]{1,4}$/),
-      ])
-
+      userId: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9_.-]*$/)]),
+      password: new FormControl('', [Validators.required]),
+      validationCode: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.pattern(/^[0-9]{1,4}$/)])
     })
     this.generateValidationCode();
-    // this.apiService.sendLoggedData1.subscribe((re: any) => {
-    //   this.errMsg = re
-    // })
-
-    // this.login()
-
   }
 
   get userId() {
@@ -52,20 +39,25 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    console.log(this.validationCode, this.loginFrom.value.validationCode);
-    
-    if ((this.validationCode === +this.loginFrom.value.validationCode)) {
-      this.apiServe.loginUser(this.loginFrom.value).subscribe((res: any) => {
-        console.log(res, 'response');
-        localStorage.setItem('token', res.data.token)
-        localStorage.setItem("userId", res.data.userId)
-        this.router.navigate(['/home'])
-        setTimeout(() => {
-          window.location.reload();
-        }, 200);
-      }, (error => {
-        this.errMsg = error.error.message
-      }))
+    // console.log(this.validationCode == this.loginFrom.value.validationCode);
+    if (this.loginFrom.valid) {
+      if ((this.validationCode == +this.loginFrom.value.validationCode)) {
+        this.apiServe.loginUser(this.loginFrom.value).subscribe((res: any) => {
+          console.log(res, 'response');
+          localStorage.setItem('token', res.data.token)
+          localStorage.setItem("userId", res.data.userId)
+          this.router.navigate(['/home'])
+          setTimeout(() => {
+            window.location.reload();
+          }, 200);
+        }, (error => {
+          this.errMsg = error.error.message
+        }))
+      } else {
+        this.errMsg = "Invalid Validation Code"
+      }
+    } else {
+      this.errMsg = 'All Fields are Required'
     }
 
     setTimeout(() => {

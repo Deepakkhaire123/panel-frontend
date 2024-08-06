@@ -1,50 +1,54 @@
-<div class="main" (click)="backgroundcolor()" id="dd">
-    <div class="login-wrap">
-      <div class="kv">
-        <form [formGroup]="loginFrom" (ngSubmit)="login()" autocomplete="off" class="ng-untouched ng-pristine ng-invalid">
-          <dl class="login-panel">
-            <dt>Management login</dt>
-            <dd>
-              <input id="userid" type="text" minlength="4" maxlength="12" placeholder="UserId" formControlName="userId" (keydown.space)="$event.preventDefault()"
-                class="ng-untouched ng-pristine ng-invalid">
-            </dd>
-            <p *ngIf="userId?.invalid && (userId?.touched || userId?.dirty)" class="validations-p">
-              <small *ngIf="userId?.errors?.['required']" class="text-danger error-message-place">UserId is
-                  required.</small>
-              <small *ngIf="userId?.errors?.['pattern']" class="text-danger error-message-place">Special
-                  characters are not allowed.</small>
+<div class="main" id="dd12">
+  <div class="login-wrap">
+    <div class="kv">
+      <form [formGroup]="loginFrom" (ngSubmit)="login()" autocomplete="off" class="ng-untouched ng-pristine ng-invalid">
+        <dl class="login-panel">
+          <dt>Management login</dt>
+          <dd>
+            <input id="userid" type="text" minlength="4" maxlength="12" placeholder="UserId" formControlName="userId"
+              (keydown.space)="$event.preventDefault()" class="ng-untouched ng-pristine ng-invalid">
+          </dd>
+          <p *ngIf="userId?.invalid && (userId?.touched || userId?.dirty)" class="validations-p">
+            <small *ngIf="userId?.errors?.['required']" class="text-danger error-message-place">UserId is
+              required.</small>
+            <small *ngIf="userId?.errors?.['pattern']" class="text-danger error-message-place">Special
+              characters are not allowed.</small>
           </p>
-            <dd>
-              <input id="password" [type]="showPassword? 'text' : 'password' " name="password" placeholder="Password" minlength="8" maxlength="16"  formControlName="password" (keydown.space)="$event.preventDefault()">
-                              <div class="btn btn-outline-secondary" type="button" id="button-addon2">
-                                <i class="fa fa-eye-slash" *ngIf="!showPassword" (click)="toggleShow()"></i>
-                                <i class="fa fa-eye" *ngIf="showPassword" (click)="toggleShow()"></i>
-                              </div>
-            </dd>
-            <p *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="validations-p">
-              <small *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password
-                  is required.</small>
+          <dd>
+            <input id="password" [type]="showPassword? 'text' : 'password' " name="password" placeholder="Password"
+              minlength="8" maxlength="16" formControlName="password" (keydown.space)="$event.preventDefault()">
+            <div class="btn btn-outline-secondary" type="button" id="button-addon2">
+              <i class="fa fa-eye-slash" *ngIf="!showPassword" (click)="toggleShow()"></i>
+              <i class="fa fa-eye" *ngIf="showPassword" (click)="toggleShow()"></i>
+            </div>
+          </dd>
+          <p *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="validations-p">
+            <small *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password
+              is required.</small>
           </p>
-            <dd class="valid-code"><input type="text" maxlength="4" formControlName="validationCode" placeholder="Validation Code"
-                class="ng-untouched ng-pristine ng-invalid" (paste)="numberOnly($event)" (focus)="numberOnly($event)" (keypress)="numberOnly($event)"
-                (input)="numberOnly($event)">
-                <p *ngIf="validationCodes?.invalid && (validationCodes?.touched || validationCodes?.dirty)"
-                class="validations-p">
-                <small *ngIf="validationCodes?.errors?.['required']"
-                    class="text-danger error-message-place">Validation code is required.</small>
-                <small *ngIf="validationCode?.errors?.['maxLength']"
-                    class="text-danger error-message-place">maxlength should be 4</small>
+          <p class="validations-p">
+              <small *ngIf="password?.errors?.['minlength']">Please length between 6 to 8 character</small>
             </p>
-                <!----><span id="randomCode"> {{validationCode}}
-              </span></dd>
-            <dd>
-              <button id="loginBtn" type="submit" class="btn-send"> Login </button>
-              <p style="color: red; font-size: 13px; font-weight: 400;">{{errMsg}}</p>
-  
-            </dd>
-          </dl>
-        </form>
-      </div>
+          <dd class="valid-code"><input type="text" maxlength="4" formControlName="validationCode"
+              placeholder="Validation Code" class="ng-untouched ng-pristine ng-invalid" (paste)="numberOnly($event)"
+              (focus)="numberOnly($event)" (keypress)="numberOnly($event)" (input)="numberOnly($event)">
+            <p *ngIf="validationCodes?.invalid && (validationCodes?.touched || validationCodes?.dirty)"
+              class="validations-p">
+              <small *ngIf="validationCodes?.errors?.['required']" class="text-danger error-message-place">Validation
+                code is required.</small>
+              <small *ngIf="validationCode?.errors?.['maxLength']" class="text-danger error-message-place">maxlength
+                should be 4</small>
+            </p>
+            <!----><span id="randomCode"> {{validationCode}}
+            </span>
+          </dd>
+          <dd>
+            <button id="loginBtn" type="submit" class="btn-send"> Login </button>
+            <p style="color: red; font-size: 13px; font-weight: 400;">{{errMsg}}</p>
+
+          </dd>
+        </dl>
+      </form>
     </div>
   </div>
-  
+</div>
