@@ -505,3 +505,6 @@
   .dropdown-content{
     cursor: pointer;
   }
+  .nav-link{ 
+    cursor: pointer;
+  }

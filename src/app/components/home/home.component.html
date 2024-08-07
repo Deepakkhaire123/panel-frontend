@@ -28,7 +28,7 @@
           </div>
           <div class="userid">
             <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="name"
-              (keydown.space)="$event.preventDefault()" placeholder="Enter Name" required=""
+               placeholder="Enter Name" required=""
               class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
             <p *ngIf="addDetails.get('name').invalid && addDetails.get('name').touched" class="validations-TTp topPWidth">
               <span *ngIf="addDetails.get('name')?.errors?.['required']" class="text-danger error-message-place">name is
@@ -85,7 +85,7 @@
     </div>
     <div class="show-list">
       <div class="business-panel">
-        <select class="business-option" formControlName="business">
+        <select class="business-option">
           <option value="">Choose Business</option>
           <option value="B2B">B2B</option>
           <option value="B2C">B2C</option>

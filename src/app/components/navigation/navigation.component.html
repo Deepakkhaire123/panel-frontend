@@ -30,7 +30,7 @@
           </div>
         </li>-->
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active">Home</a>
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
         </li>
         <!--  <li class="nav-item">
           <a class="nav-link" routerLink="/statement" routerLinkActive="active">Statement</a>
@@ -75,45 +75,59 @@
     <div class="modal-dailog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title chnagePass">Change Password</h4><i data-dismiss="modal" #closeCreditRef
-            aria-label="Close" (click)="closePopRese()" class="fa-solid fa-square-xmark cross"></i>
+          <h4 class="modal-title chnagePass">Change Password</h4>
+            <i class="fa fa-window-close close-icon" aria-hidden="true" style="cursor: pointer;" data-dismiss="modal" #closeCreditRef></i>
+
         </div>
         <div>
-          <form  [formGroup]="changePasswordForm" (ngSubmit)="updatePassword()" autocomplete="off"
-            class="change_pass_form ng-untouched ng-pristine ng-invalid">
-            <div class="new-password"><span class="input1">New
-                Password</span><input type="password" placeholder="Enter" autocomplete="false"
-                formControlName="newPassword" minlength="8" maxlength="14"
-                class="input1 ng-untouched ng-pristine ng-invalid inp1"><span
-                class="must">*</span><!---->
-                <p class="validations-p">
+          <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()" autocomplete="off"
+          class="change_pass_form ng-untouched ng-pristine ng-invalid">
+          <div class="new-password"><span class="input1">New
+              Password</span><input type="password" placeholder="Enter" autocomplete="false"
+              formControlName="newPassword" minlength="8" maxlength="14"
+              class="input1 ng-untouched ng-pristine ng-invalid inp1"><span class="must">*</span><!---->
+            <p class="validations-p">
                   <small *ngIf="newPassword?.errors && newPassword?.errors?.['weakPassword']">
                     Uppercase,Lowercase,Number,Special character.
                   </small>
-  
                 </p>
-  
                 <p *ngIf="newPassword?.invalid && (newPassword?.touched || newPassword?.dirty)" class="validations-p">
-                  <small *ngIf="newPassword?.errors?.['required']" class="text-danger error-message-place">newPassword is
+                  <small *ngIf="newPassword?.errors?.['required']" class="text-danger error-message-place">New Password is
                     required</small>
-                  <small *ngIf="newPassword?.errors?.['minlength']">New Password : min 6 character.</small>
+                  <small *ngIf="newPassword?.errors?.['minlength']" class="text-danger error-message-place">New Password : min 6 character.</small>
                 </p>
-              </div>
-            <div class="confirmPassword"><span class="conform-new-password">Confirm Password
-              </span><input type="password" placeholder="Enter" formControlName="confirmPassword"
-                autocomplete="false" minlength="8" maxlength="14" class="ng-untouched ng-pristine ng-invalid inp2"><span
-                class="must">*</span></div>
-            <div class="old-password"><span class="input1">Your Password
-            </span><input type="password" placeholder="Enter" autocomplete="false"
-                formControlName="currentPassword" minlength="8" maxlength="14"
-                class="ng-untouched ng-pristine ng-invalid inp3"><span class="must">*</span><!----></div>
-                <div style="text-align: center; margin-top: 13px;">
-                  <span style="color: red; font-size: 12px; font-weight: 400;">{{confirmPasswordErr}}</span>
-                </div>
-  
-            <div class="change_btn_box"><button type="submit"
-                class="btn btn-primary changebtn">Change</button></div>
-          </form>
+          </div>
+          <div class="confirmPassword"><span class="conform-new-password">Confirm Password
+            </span><input type="password" placeholder="Enter" formControlName="confirmPassword" autocomplete="false"
+              minlength="8" maxlength="14" class="ng-untouched ng-pristine ng-invalid inp2"><span class="must">*</span>
+            <!-- <p class="validations-p">
+                    <small *ngIf="confirmPassword?.errors && confirmPassword?.errors?.['weakPassword']">
+                      Uppercase,Lowercase,Number,Special character.
+                    </small>
+                  </p> -->
+                  <p *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)" class="validations-p">
+                    <small *ngIf="confirmPassword?.errors?.['required']" class="text-danger error-message-place">Confirm Password is
+                      required</small>
+                    <small *ngIf="confirmPassword?.errors?.['minlength']">Confirm Password : min 6 character.</small>
+                  </p> 
+          </div>
+          <div class="old-password"><span class="input1">Your Password
+            </span><input type="password" placeholder="Enter" autocomplete="false" formControlName="currentPassword"
+              minlength="8" maxlength="14" class="ng-untouched ng-pristine ng-invalid inp3"><span
+              class="must">*</span><!---->
+              <p *ngIf="currentPassword?.invalid && (currentPassword?.touched || currentPassword?.dirty)" class="validations-p">
+                <small *ngIf="currentPassword?.errors?.['required']" class="text-danger error-message-place">Current Password is
+                  required</small>
+                <small *ngIf="currentPassword?.errors?.['minlength']">Your Password : min 6 character.</small>
+              </p> 
+            </div>
+          <div style="text-align: center; margin-top: 13px;">
+          </div>
+         
+          <span style="color: red; font-size: 12px; font-weight: 400;">{{confirmPasswordErr}}</span>
+
+          <div class="change_btn_box"><button type="submit" class="btn btn-primary changebtn">Change</button></div>
+        </form>
         </div>
       </div>
     </div>

@@ -46,9 +46,10 @@ export class LoginComponent implements OnInit {
           console.log(res, 'response');
           localStorage.setItem('token', res.data.token)
           localStorage.setItem("userId", res.data.userId)
+          localStorage.setItem("id", res.data._id)
           this.router.navigate(['/home'])
           setTimeout(() => {
-            window.location.reload();
+            // window.location.reload();
           }, 200);
         }, (error => {
           this.errMsg = error.error.message

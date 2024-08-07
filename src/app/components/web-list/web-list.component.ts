@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-web-list',
@@ -12,7 +13,7 @@ export class WebListComponent implements OnInit {
 
   addWebsite: any;
   motherID: any;
-  showWebList : any;
+  showWebList: any;
 
   constructor(private activeRoute: ActivatedRoute, private apiServe: ApiService) { }
 
@@ -27,8 +28,8 @@ export class WebListComponent implements OnInit {
     this.getWebsitesList()
   }
 
-  getWebsitesList(){
-    this.apiServe.getWebsites(this.motherID).subscribe((res : any)=>{
+  getWebsitesList() {
+    this.apiServe.getWebsites(this.motherID).subscribe((res: any) => {
       this.showWebList = res?.data;
     })
   }
@@ -38,9 +39,70 @@ export class WebListComponent implements OnInit {
       "websiteURL": this.addWebsite?.value?.websiteURL,
       "motherPanelId": this.motherID
     }
-    console.log(data,'payload');
-    this.apiServe.addWebsite(data).subscribe((res : any)=>{
-      this.getWebsitesList();
-    })
+    if (this.addWebsite.valid) {
+      this.apiServe.addWebsite(data).subscribe((res: any) => {
+        this.addWebsite.reset();
+        this.getWebsitesList();
+      })
+    } else {
+      this.showAlert2('Field is Required')
+    }
+  }
+
+  // sweetalert
+  showAlert1(message: any) {
+    const swalWithStyle = Swal.mixin({
+      customClass: {
+        popup: 'my-custom-popup',
+      },
+    });
+    swalWithStyle.fire({
+      width: 400,
+      color: '#000',
+      icon: 'success',
+      title: message,
+      timer: 3000,
+    });
+    const customCss = `
+      .swal2-popup.my-custom-popup {
+        border: 5px solid green;
+        border-radius: 10px;
+      }
+      .swal2-styled.swal2-confirm {
+        background: green;
+        border-color:green
+    }
+    `;
+    const style = document.createElement('style');
+    style.textContent = customCss;
+    document.head.append(style);
+  }
+
+  showAlert2(message: any) {
+    const swalWithStyle = Swal.mixin({
+      customClass: {
+        popup: 'my-custom-popup',
+      },
+    });
+    swalWithStyle.fire({
+      width: 400,
+      color: '#000',
+      icon: 'error',
+      title: message,
+      timer: 3000,
+    });
+    const customCss = `
+      .swal2-popup.my-custom-popup {
+        border: 5px solid red;
+        border-radius: 10px;
+      }
+      .swal2-styled.swal2-confirm {
+        background: red;
+        border-color:red
+    }
+    `;
+    const style = document.createElement('style');
+    style.textContent = customCss;
+    document.head.append(style);
   }
 }

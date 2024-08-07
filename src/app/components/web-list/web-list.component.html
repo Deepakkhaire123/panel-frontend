@@ -46,17 +46,10 @@
             <td id="websiteName" class="site" >{{list?.motherPanelId?.panelFor}}</td>
            
           </tr>
-          <!-- <tr *ngFor="let item of marshelList; let i = index">
-            <td id="websiteName" class="site" style="width: 20px;">{{i + 1}}</td>
-            <td id="websiteName" class="site" style="width: 20px;">{{item.name}}</td>
-            <td id="websiteName" class="site" style="width: 20px;">{{item.userId}}</td>
-             <td id="websiteName" class="site">*******************</td> 
-            <td id="multiBtn" class="action" >
-              <div class="row"><button class="action_dd" data-toggle="modal" data-target="#myModal"
-                  (click)="getUserId(item._id)">Change
-                  Password</button></div>
-            </td>
-          </tr> -->
+          <tr *ngIf="showWebList?.length === 0">
+            <td id="websiteName" class="site" style="text-align: center;" colspan="5"> No Data Available </td>
+          </tr>
+         
         </tbody>
       </table>
     </div>

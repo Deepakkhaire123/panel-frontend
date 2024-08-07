@@ -48,4 +48,8 @@ export class ApiService {
     return this.http.delete(`${this.baseUrl}/api/v1/panel/delete-panel/${id}`)
   }
 
+  changeOwnPass(id : any, obj : any){
+    return this.http.put(`${this.baseUrl}/api/v1/auth/change-password-user/${id}`,obj)
+  }
+
 }
