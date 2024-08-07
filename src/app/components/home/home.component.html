@@ -11,6 +11,10 @@
               <option value="B2B">B2B</option>
               <option value="B2C">B2C</option>
             </select>
+            <p *ngIf="addDetails.get('business').invalid && addDetails.get('business').touched" class="validations-TTp" style="margin-left: 7px;">
+              <span *ngIf="addDetails.get('business')?.errors?.['required']" class="text-danger error-message-place">please select business.</span>
+            </p>
+
           </div>
           <div class="business-panel">
             <select class="business-option" formControlName="panelFor">
@@ -18,34 +22,36 @@
               <option value="AGENT">Agent</option>
               <option value="USER">User</option>
             </select>
+            <p *ngIf="addDetails.get('panelFor').invalid && addDetails.get('panelFor').touched" class="validations-TTp" style="margin-left: 7px;">
+              <span *ngIf="addDetails.get('panelFor')?.errors?.['required']" class="text-danger error-message-place">please select user.</span>
+            </p>
           </div>
           <div class="userid">
             <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="name"
               (keydown.space)="$event.preventDefault()" placeholder="Enter Name" required=""
               class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
-            <!-- <p *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="validations-TTp topPWidth">
-              <small *ngIf="name?.errors?.['required']" class="text-danger error-message-place">name is
-                required.</small>
-              <small *ngIf="name?.errors?.['minlength']">name must be at least 4 characters long</small>
-              <small *ngIf="name?.errors?.['pattern']" class="text-danger error-message-place">Special
-                characters are not allowed.</small>
-            </p> -->
+            <p *ngIf="addDetails.get('name').invalid && addDetails.get('name').touched" class="validations-TTp topPWidth">
+              <span *ngIf="addDetails.get('name')?.errors?.['required']" class="text-danger error-message-place">name is
+                required.</span>
+              <span *ngIf="addDetails.get('name')?.errors?.['minlength']" class="text-danger error-message-place">name must be at least 4 characters long</span>
+              <span *ngIf="addDetails.get('name')?.errors?.['pattern']" class="text-danger error-message-place">Special
+                characters are not allowed.</span>
+            </p>
 
           </div>
           <div class="userid">
             <input id="searchUserId" type="text" maxlength="14" minlength="2" formControlName="userId"
               (keydown.space)="$event.preventDefault()" placeholder="Enter UserId" required=""
               class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
-            <!-- <p *ngIf=" userId?.invalid && (userId?.touched || userId?.dirty)" class="validations-TTp topPWidth">
-              <small *ngIf="userId?.errors?.['required']" class="text-danger error-message-place">UserId is
-                required.</small>
-              <small *ngIf="userId?.errors?.['minlength']">UserId must be at least 8 characters long</small>
-              <small *ngIf="userId?.errors?.['pattern']" class="text-danger error-message-place">Special
-                characters are not allowed.</small>
-
+            <p *ngIf=" userId?.invalid && (userId?.touched || userId?.dirty)" class="validations-TTp topPWidth">
+              <span *ngIf="userId?.errors?.['required']" class="text-danger error-message-place">UserId is
+                required.</span>
+              <span *ngIf="userId?.errors?.['minlength']" class="text-danger error-message-place">UserId must be at least 8 characters long</span>
+              <span *ngIf="userId?.errors?.['pattern']" class="text-danger error-message-place">Special
+                characters are not allowed.</span>
 
             </p>
-            <small style="color: red; font-size: 12px; font-weight: bold;">
+            <!-- <small style="color: red; font-size: 12px; font-weight: bold;">
               {{ErrMSG}}
             </small> -->
 
@@ -54,18 +60,18 @@
               <input id="searchUserId" [type]="showPassword? 'text' : 'password'" minlength="8" maxlength="16" formControlName="password"
                 (keydown.space)="$event.preventDefault()" placeholder="Enter Password" required=""
                 class="search-input searchTB" ng-reflect-required="" ng-reflect-name="name">
-              <!-- <p class="topPWidth">
-                <small *ngIf="password?.errors && password?.errors?.['weakPassword']">
+              <p class="topPWidth">
+                <span *ngIf="password?.errors && password?.errors?.['weakPassword']">
                   One uppercase letter, lowercase letter, digit, and one special character.
-                </small>
+                </span>
 
               </p>
 
               <p *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="validations-TTp topPWidth">
-                <small *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password is
-                  required</small>
-                <small *ngIf="password?.errors?.['minlength']">Password: min 6 character.</small>
-              </p> -->
+                <span *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password is
+                  required</span>
+                <span *ngIf="password?.errors?.['minlength']" class="text-danger error-message-place" >Password: min 6 character.</span>
+              </p>
               <div class="btn btn-outline-secondary" type="button" id="button-addon2">
                 <i class="fa fa-eye-slash" *ngIf="!showPassword" (click)="toggleShow()"></i>
                 <i class="fa fa-eye" *ngIf="showPassword" (click)="toggleShow()"></i>
@@ -129,7 +135,7 @@
             <button class="action_dd" data-toggle="modal" data-target="#myModal"
               routerLink="/website-list/{{list?._id}}">
               Add Website</button>
-            <button class="btn btn-warning" data-toggle="modal" (click)="updatePanelName(list?._id)" data-target="#myModal">
+            <button class="btn btn-warning" data-toggle="modal" (click)="updatePanelName(list)" data-target="#myModal">
               Edit</button>
             <button class="btn btn-danger mx-2" (click)="deletePostPop(list?._id)">
               Delete</button>
@@ -157,7 +163,7 @@
         <form [formGroup]="updatePanelForm" (ngSubmit)="updatePanelData()">
           <div class="popinput">
             <div>
-              <p>Panel Name</p>
+              <p style="text-align: left;">Panel Name :</p>
               <input #inputBox1 type="text" [(ngModel)]="inputText1"
                 minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="panelName"
                 placeholder="Enter Panel Name">
@@ -187,16 +193,16 @@
               Password</span><input type="password" placeholder="Enter" autocomplete="false"
               formControlName="newPassword" minlength="8" maxlength="14"
               class="input1 ng-untouched ng-pristine ng-invalid inp1"><span class="must">*</span><!---->
-            <!-- <p class="validations-p">
+            <p class="validations-p">
                   <small *ngIf="newPassword?.errors && newPassword?.errors?.['weakPassword']">
                     Uppercase,Lowercase,Number,Special character.
                   </small>
                 </p>
                 <p *ngIf="newPassword?.invalid && (newPassword?.touched || newPassword?.dirty)" class="validations-p">
-                  <small *ngIf="newPassword?.errors?.['required']" class="text-danger error-message-place">newPassword is
+                  <small *ngIf="newPassword?.errors?.['required']" class="text-danger error-message-place">New Password is
                     required</small>
-                  <small *ngIf="newPassword?.errors?.['minlength']">New Password : min 6 character.</small>
-                </p> -->
+                  <small *ngIf="newPassword?.errors?.['minlength']" class="text-danger error-message-place">New Password : min 6 character.</small>
+                </p>
           </div>
           <div class="confirmPassword"><span class="conform-new-password">Confirm Password
             </span><input type="password" placeholder="Enter" formControlName="confirmPassword" autocomplete="false"
@@ -205,19 +211,26 @@
                     <small *ngIf="confirmPassword?.errors && confirmPassword?.errors?.['weakPassword']">
                       Uppercase,Lowercase,Number,Special character.
                     </small>
-                  </p>
-                  <p *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)" class="validations-p">
-                    <small *ngIf="confirmPassword?.errors?.['required']" class="text-danger error-message-place">confirmPassword is
-                      required</small>
-                    <small *ngIf="confirmPassword?.errors?.['minlength']">New Password : min 6 character.</small>
                   </p> -->
+                  <p *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)" class="validations-p">
+                    <small *ngIf="confirmPassword?.errors?.['required']" class="text-danger error-message-place">Confirm Password is
+                      required</small>
+                    <small *ngIf="confirmPassword?.errors?.['minlength']">Confirm Password : min 6 character.</small>
+                  </p> 
           </div>
           <div class="old-password"><span class="input1">Your Password
             </span><input type="password" placeholder="Enter" autocomplete="false" formControlName="currentPassword"
               minlength="8" maxlength="14" class="ng-untouched ng-pristine ng-invalid inp3"><span
-              class="must">*</span><!----></div>
+              class="must">*</span><!---->
+              <p *ngIf="currentPassword?.invalid && (currentPassword?.touched || currentPassword?.dirty)" class="validations-p">
+                <small *ngIf="currentPassword?.errors?.['required']" class="text-danger error-message-place">Current Password is
+                  required</small>
+                <small *ngIf="currentPassword?.errors?.['minlength']">Your Password : min 6 character.</small>
+              </p> 
+            </div>
           <div style="text-align: center; margin-top: 13px;">
           </div>
+         
           <span style="color: red; font-size: 12px; font-weight: 400;">{{errMsg}}</span>
 
           <div class="change_btn_box"><button type="submit" class="btn btn-primary changebtn">Change</button></div>

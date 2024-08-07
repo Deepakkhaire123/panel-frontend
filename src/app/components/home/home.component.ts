@@ -40,12 +40,10 @@ export class HomeComponent implements OnInit {
 
     this.changePasswordForm = new FormGroup({
       newPassword: new FormControl('', [
-        Validators.required,
-        passwordValidator(),
+        Validators.required
       ]),
       confirmPassword: new FormControl('', [
         Validators.required,
-        passwordValidator(),
       ]),
       currentPassword: new FormControl('', Validators.required),
     });
@@ -62,12 +60,16 @@ export class HomeComponent implements OnInit {
   }
   addData() {
     console.log(this.addDetails.value);
+    if(this.addDetails.valid){
     this.apiServe.addPanels(this.addDetails.value).subscribe((res: any) => {
       if (res) {
         this.showAlert1('Panel added Successfully');
         this.getPanels();
       }
     });
+  }else{
+    this.showAlert2('All Fields are Required')
+  }
   }
   updateCursorPosition1(event: any) {
     this.cursorPosition1 = event.target.selectionStart;
@@ -82,6 +84,12 @@ export class HomeComponent implements OnInit {
   get confirmPassword() {
     return this.changePasswordForm.get('confirmPassword');
   }
+  get userId() {
+    return this.addDetails.get('userId');
+  }
+  get password() {
+    return this.addDetails.get('password');
+  }
   changePassword(id: any) {
     this.panelId = id;
   }
@@ -90,6 +98,7 @@ export class HomeComponent implements OnInit {
       this.changePasswordForm.value.newPassword ===
         this.changePasswordForm.value.confirmPassword
     );
+    if(this.changePasswordForm.valid){
     if (
       this.changePasswordForm.value.newPassword ===
       this.changePasswordForm.value.confirmPassword
@@ -113,6 +122,9 @@ export class HomeComponent implements OnInit {
     } else {
       this.errMsg = 'New Password and Confirm Password are not Matched';
     }
+  }else{
+    this.errMsg = 'All Fields are Required'
+  }
 
     setTimeout(() => {
       this.errMsg = '';
@@ -208,8 +220,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  updatePanelName(id: string) {
-    this.panelId = id;
+  updatePanelName(data : any) {
+    this.panelId = data?._id;
+    this.inputText1 = data?.name
+    
   }
 
   updatePanelData() {
