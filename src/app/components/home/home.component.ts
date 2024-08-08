@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { passwordValidator } from 'src/app/services/password.validators';
@@ -20,11 +20,26 @@ export class HomeComponent implements OnInit {
   panelId: any;
   errMsg = '';
   drpdwn = false;
+  Bdrpdwn = false;
   updatePanelForm: any;
   showPassword: any;
+  panelForArr = ['USER', 'AGENT']
+  businessArr = ['B2B', 'B2C']
+  defaultBusiOpt : any = [];
+  defaultUsersOpt : any = [];
   constructor(private apiServe: ApiService) {}
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
 
+    if (!target.closest('.drpdwn')) {
+      this.drpdwn = false;
+      this.Bdrpdwn = false;
+    }
+  }
   ngOnInit(): void {
+    this.defaultBusiOpt.push(...this.businessArr)
+    this.defaultUsersOpt.push(...this.panelForArr)
     this.backgroundcolor();
     this.addDetails = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -36,7 +51,7 @@ export class HomeComponent implements OnInit {
       business: new FormControl('', Validators.required),
       panelFor: new FormControl('', Validators.required),
     });
-    this.getPanels();
+    this.getPanels(this.defaultBusiOpt,this.defaultUsersOpt);
 
     this.changePasswordForm = new FormGroup({
       newPassword: new FormControl('', [
@@ -53,8 +68,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getPanels() {
-    this.apiServe.getPanels().subscribe((res: any) => {
+  getPanels(data:any, data1 : any) {
+    this.apiServe.getPanels(data, data1).subscribe((res: any) => {
       this.showPanelList = res?.data;
     });
   }
@@ -64,7 +79,7 @@ export class HomeComponent implements OnInit {
     this.apiServe.addPanels(this.addDetails.value).subscribe((res: any) => {
       if (res) {
         this.showAlert1('Panel added Successfully');
-        this.getPanels();
+        this.getPanels(this.defaultBusiOpt,this.defaultUsersOpt);
       }
     });
   }else{
@@ -112,7 +127,7 @@ export class HomeComponent implements OnInit {
         (res: any) => {
           this.changePasswordForm.reset();
           this.showAlert1('Password updated Successfully');
-          this.getPanels();
+          this.getPanels(this.defaultBusiOpt,this.defaultUsersOpt);
           this.closeRefa.nativeElement.click();
         },
         (error) => {
@@ -131,8 +146,31 @@ export class HomeComponent implements OnInit {
     }, 3000);
   }
 
+  openBDropdown() {
+    this.Bdrpdwn = !this.Bdrpdwn;
+  }
   openDropdown() {
     this.drpdwn = !this.drpdwn;
+  }
+  defaultOption(data: any) {
+    const index = this.defaultBusiOpt.indexOf(data);
+    if (index > -1) {
+      this.defaultBusiOpt.splice(index, 1);
+    } else {
+      this.defaultBusiOpt.push(data);
+    }
+    console.log(this.defaultBusiOpt);
+    this.getPanels(this.defaultBusiOpt,this.defaultUsersOpt);
+  }
+  defaulUsers(data: any) {
+    const index = this.defaultUsersOpt.indexOf(data);
+    if (index > -1) {
+      this.defaultUsersOpt.splice(index, 1);
+    } else {
+      this.defaultUsersOpt.push(data);
+    }
+    console.log(this.defaultUsersOpt);
+    this.getPanels(this.defaultBusiOpt,this.defaultUsersOpt);
   }
   backgroundcolor() {
     document.body.style.backgroundColor = '#fff';
@@ -213,7 +251,7 @@ export class HomeComponent implements OnInit {
         this.apiServe.deletePanel(panelId).subscribe((res: any) => {
           if (res) {
             this.showAlert1('Panel Deleted Successfully');
-            this.getPanels();
+            this.getPanels(this.defaultBusiOpt,this.defaultUsersOpt);
           }
         });
       }
@@ -236,7 +274,7 @@ export class HomeComponent implements OnInit {
         if (res) {
           this.showAlert1('Panel Updated Successfully!');
           this.updatePanelForm.reset();
-          this.getPanels();
+          this.getPanels(this.defaultBusiOpt,this.defaultUsersOpt);
           this.closeRef.nativeElement.click();
         }
       },

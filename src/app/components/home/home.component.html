@@ -6,7 +6,7 @@
       <div id="userSearchUl" class="search-wrap">
         <div class="searchbox">
           <div class="business-panel">
-            <select class="business-option" formControlName="business">
+            <select class="business-option1" formControlName="business">
               <option value="">Choose Business</option>
               <option value="B2B">B2B</option>
               <option value="B2C">B2C</option>
@@ -84,24 +84,41 @@
       <button type="submit" id="search" class="btn-send add_website_btn">Add</button>
     </div>
     <div class="show-list">
-      <div class="business-panel">
+      <!-- <div class="business-panel">
         <select class="business-option">
           <option value="">Choose Business</option>
           <option value="B2B">B2B</option>
           <option value="B2C">B2C</option>
         </select>
-      </div>
-      <div class="action-div">
+      </div> -->
+      <div class="action-div" (click)="$event.stopPropagation()">
         <div>
-          <div class="dropdown">
-            <button class="dropdown-btn" type="button" (click)="openDropdown()">Select Options </button>
+          <div class="dropdown" style="margin: 0 !important;">
+            <button class="dropdown-btn" type="button" (click)="openBDropdown()">Select Business </button>
+            <div class="dropdown-content drpdwn" [class]="Bdrpdwn ? 'show' : 'hide'">
+
+              <label *ngFor="let item of businessArr">
+                <span style="float: left; overflow: hidden;text-overflow: ellipsis;">{{item}} </span>
+                <!-- <input type="checkbox" [value]="item" (click)="defaultOption(item)"
+                [checked]="defaultDomin(item)" style="float: right;width: 20px;" /> -->
+                <input type="checkbox" [value]="item" checked (click)="defaultOption(item)"  style="float: right;width: 20px;" />
+              </label>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="action-div" (click)="$event.stopPropagation()">
+        <div>
+          <div class="dropdown" style="margin: 0 !important;">
+            <button class="dropdown-btn" type="button" (click)="openDropdown()">Select Users </button>
             <div class="dropdown-content drpdwn" [class]="drpdwn ? 'show' : 'hide'">
 
-              <label>
-                <span style="float: left;">user </span>
+              <label *ngFor="let item of panelForArr">
+                <span style="float: left; overflow: hidden;text-overflow: ellipsis;">{{item}} </span>
                 <!-- <input type="checkbox" [value]="item._id" (click)="defaultOption(item._id)"
                 [checked]="defaultDomin(item._id)" style="float: right;width: 20px;" /> -->
-                <input type="checkbox" [value]="" checked style="float: right;width: 20px;" />
+                <input type="checkbox" [value]="item" checked (click)="defaulUsers(item)" style="float: right;width: 20px;" />
               </label>
 
             </div>

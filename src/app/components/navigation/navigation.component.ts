@@ -62,6 +62,8 @@ export class NavigationComponent implements OnInit{
           this.showAlert1(res?.message);
           this.changePasswordForm.reset();
           this.closeCreditRef.nativeElement.click();
+        },(error)=>{
+          this.confirmPasswordErr = error.error.message
         })
         
       }else{
