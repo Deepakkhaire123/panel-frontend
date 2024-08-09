@@ -26,7 +26,7 @@
     /* padding-top: 5px;
     padding-bottom: 7px; */
     /* width: 260px; */
-    width: 210px;
+    width: 206px;
     border-radius: 7px;
     /* border: none;
     border-style: inset; */
@@ -117,7 +117,7 @@
   }
   
   .searchTB {
-    padding-left: 22px;
+    padding-left: 12px;
     width: 290px;
     height: 32px;
     border: 1px solid #aaa;
@@ -845,4 +845,7 @@ small {
   padding: 6px;
   border-radius: 8px;
   height: 33px;
+}
+.error-message-place1{
+  font-size: 12px;
 }

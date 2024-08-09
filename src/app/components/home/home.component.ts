@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
     // });
 
     this.updatePanelForm = new FormGroup({
-      panelName: new FormControl('', [Validators.required, Validators.pattern(/^(?!.*[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{2300}-\u{23FF}])^[a-zA-Z0-9 ]*$/u)]),
+      panelName: new FormControl('', [Validators.required, Validators.minLength(4) ,Validators.pattern(/^(?!.*[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{2300}-\u{23FF}])^[a-zA-Z0-9 ]*$/u)]),
       userId: new FormControl('', [
         Validators.required,
         Validators.pattern(/^[a-zA-Z0-9_.-]*$/),
@@ -274,19 +274,21 @@ export class HomeComponent implements OnInit {
 
   updatePanelName(data : any) {
     this.panelId = data?._id;
-    this.inputText1 = data?.name
-    this.inputText2 = data?.userId
-    this.inputText3 = data?.business
-    this.inputText4 = data?.panelFor
-    this.inputText5 = data?.password
+    this.inputText1 = data?.name;
+    this.inputText2 = data?.userId;
+    this.inputText3 = data?.business;
+    this.inputText4 = data?.panelFor;
+    this.inputText5 = data?.password;
   }
 
   updatePanelData() {
-    const payload = {
-      name: this.updatePanelForm.value.panelName,
-    };
+    // console.log(this.updatePanelForm.value);
+    
+    // const payload = {
+    //   name: this.updatePanelForm.value.panelName,
+    // };
 
-    this.apiServe.updatePanel(this.panelId, payload).subscribe(
+    this.apiServe.updatePanel(this.panelId, this.updatePanelForm.value).subscribe(
       (res: any) => {
         if (res) {
           this.showAlert1('Panel Updated Successfully!');
@@ -300,7 +302,6 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    console.log(payload);
   }
 
   toggleShow() {

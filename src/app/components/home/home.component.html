@@ -40,7 +40,7 @@
 
           </div>
           <div class="userid">
-            <input id="searchUserId" type="text" maxlength="14" minlength="2" formControlName="userId"
+            <input id="searchUserId" type="text" maxlength="16" minlength="2" formControlName="userId"
               (keydown.space)="$event.preventDefault()" placeholder="Enter UserId" required=""
               class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
             <p *ngIf=" userId?.invalid && (userId?.touched || userId?.dirty)" class="validations-TTp topPWidth">
@@ -57,7 +57,7 @@
 
           </div>
           <div class="userid">
-              <input id="searchUserId" [type]="showPassword? 'text' : 'password'" minlength="8" maxlength="16" formControlName="password"
+              <input id="searchUserId" [type]="showPassword? 'text' : 'password'" minlength="8" maxlength="20" formControlName="password"
                 (keydown.space)="$event.preventDefault()" placeholder="Enter Password" required=""
                 class="search-input searchTB" ng-reflect-required="" ng-reflect-name="name">
               <p class="topPWidth">
@@ -92,7 +92,7 @@
         </select>
       </div> -->
       <div class="action-div" (click)="$event.stopPropagation()">
-        <div>
+        <!-- <div> -->
           <div class="dropdown" style="margin: 0 !important;">
             <button class="dropdown-btn" type="button" (click)="openBDropdown()">Select Business </button>
             <div class="dropdown-content drpdwn" [class]="Bdrpdwn ? 'show' : 'hide'">
@@ -106,11 +106,11 @@
 
             </div>
           </div>
-        </div>
+        <!-- </div> -->
       </div>
       <div class="action-div" (click)="$event.stopPropagation()">
-        <div>
-          <div class="dropdown" style="margin: 0 !important;">
+        <!-- <div> -->
+          <div class="dropdown" style="margin: 0 !important; ">
             <button class="dropdown-btn" type="button" (click)="openDropdown()">Select Users </button>
             <div class="dropdown-content drpdwn" [class]="drpdwn ? 'show' : 'hide'">
 
@@ -123,7 +123,7 @@
 
             </div>
           </div>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   </form>
@@ -184,17 +184,27 @@
               <input #inputBox1 type="text" [(ngModel)]="inputText1"
                 minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="panelName"
                 placeholder="Enter Panel Name">
-
+                <p style="text-align: left; margin: 0;">
+                  <span *ngIf="updatePanelForm.get('panelName')?.errors?.['pattern']" class="text-danger error-message-place">Special
+                    characters are not allowed.</span>
+                </p>
                 <label for="inputBox2" style="text-align: left; width:100%">UserId :</label>
-              <input #inputBox2 type="text" [(ngModel)]="inputText2"
+              <input #inputBox2 type="text" [(ngModel)]="inputText2" (keydown.space)="$event.preventDefault()"
                 minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="userId"
                 placeholder="Enter UserId">
-
+                <p style="text-align: left; margin: 0;">
+                <span *ngIf="updatePanelForm.get('userId').errors?.['pattern']" class="text-danger error-message-place">Special
+                  characters are not allowed.</span>
+                  </p>
                 <label for="inputBox3" style="text-align: left; width:100%">Business :</label>
-              <input #inputBox3 type="text" [(ngModel)]="inputText3"
+              <!-- <input #inputBox3 type="text" [(ngModel)]="inputText3"
                 minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="business"
-                placeholder="Enter Business">
-
+                placeholder="Enter Business"> -->
+                <select class="update-select" [(ngModel)]="inputText3" formControlName="business">
+                  <option value="">Choose Business</option>
+                  <option value="B2B">B2B</option>
+                  <option value="B2C">B2C</option>
+                </select>
                 <label for="inputBox4" style="text-align: left; width:100%">Panel For :</label>
               <!-- <input #inputBox4 type="text" [(ngModel)]="inputText4"
                 minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="panelFor"
@@ -208,9 +218,14 @@
                 <label for="inputBox5" style="text-align: left; width:100%">Password :</label>
               <input #inputBox5 type="text" [(ngModel)]="inputText5"
                 minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="password"
-                placeholder="Enter Password">
+                placeholder="Enter Password" style="margin: 0;">
+                <p style="text-align: left; margin: 0;">
+                  <span *ngIf="updatePanelForm.get('password').errors && updatePanelForm.get('password')?.errors?.['weakPassword']" class="text-danger error-message-place">
+                    One uppercase letter, lowercase letter, digit, and one special character.
+                  </span>
+                </p>
             </div>
-            <button type="submit" class="btn btn-success">Save changes</button>
+            <button type="submit" class="btn btn-success" style="margin-top: 10px;">Save changes</button>
           </div>
         </form>
 
