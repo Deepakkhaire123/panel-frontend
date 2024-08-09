@@ -6,7 +6,7 @@
         <div id="userSearchUl" class="search-wrap">
           <div class="searchbox">
             <div class="userid">
-              <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="websiteURL"
+              <input id="searchUserId" type="text" formControlName="websiteURL"
                 (keydown.space)="$event.preventDefault()" placeholder="Enter website" required=""
                 class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
               <!-- <p *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="validations-TTp topPWidth">
@@ -21,9 +21,6 @@
   
           </div>
         </div><button type="submit" id="search" class="btn-send add_website_btn">Add</button>
-        <!-- <small style="color: red; font-size: 12px; font-weight: bold;">
-          {{ErrMSG}}
-        </small> -->
       </div>
     </form>
     <div>
