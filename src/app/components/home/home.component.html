@@ -61,7 +61,7 @@
                 (keydown.space)="$event.preventDefault()" placeholder="Enter Password" required=""
                 class="search-input searchTB" ng-reflect-required="" ng-reflect-name="name">
               <p class="topPWidth">
-                <span *ngIf="password?.errors && password?.errors?.['weakPassword']">
+                <span *ngIf="password?.errors && password?.errors?.['weakPassword']" class="text-danger error-message-place">
                   One uppercase letter, lowercase letter, digit, and one special character.
                 </span>
 
@@ -70,7 +70,7 @@
               <p *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="validations-TTp topPWidth">
                 <span *ngIf="password?.errors?.['required']" class="text-danger error-message-place">Password is
                   required</span>
-                <span *ngIf="password?.errors?.['minlength']" class="text-danger error-message-place" >Password: min 6 character.</span>
+                <!-- <span *ngIf="password?.errors?.['minlength']" class="text-danger error-message-place" >Password: min 6 character.</span> -->
               </p>
               <div class="btn btn-outline-secondary" type="button" id="button-addon2">
                 <i class="fa fa-eye-slash" *ngIf="!showPassword" (click)="toggleShow()"></i>
