@@ -32,6 +32,7 @@
             <th  id="hWebsiteName2" >Panel Name</th>
             <th  id="hWebsiteName2" >Business</th>
             <th  id="hWebsiteName2" >Panel User</th>
+            <th  id="hWebsiteName3" >Action</th>
           </tr>
         </thead>
         <tbody>
@@ -41,13 +42,43 @@
             <td id="websiteName" class="site" >{{list?.motherPanelId?.name}}</td>
             <td id="websiteName" class="site" >{{list?.motherPanelId?.business}}</td>
             <td id="websiteName" class="site" >{{list?.motherPanelId?.panelFor}}</td>
-           
+            <td id="multiBtn" class="action">
+              <button class="btn btn-warning" data-toggle="modal" (click)="updateWebsiteName(list)" data-target="#myModal1">
+                Edit</button>
+              <button class="btn btn-danger mx-2" (click)="deleteWebsitePop(list?._id)">
+                Delete</button>
+            </td>
           </tr>
           <tr *ngIf="showWebList?.length === 0">
-            <td id="websiteName" class="site" style="text-align: center;" colspan="5"> No Data Available </td>
+            <td id="websiteName" class="site" style="text-align: center;" colspan="6"> No Data Available </td>
           </tr>
          
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <div class="modal" id="myModal1" role="dialog" class="modal" aria-modal="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Website</h5>
+          <i class="fa fa-window-close close-icon" aria-hidden="true" #closeRef data-dismiss="modal"></i>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="updateWebsiteForm" (ngSubmit)="updateWebsiteData()">
+            <div class="popinput">
+              <div>
+                <p style="text-align: left;">Website Name :</p>
+                <input #inputBox1 type="text" [(ngModel)]="inputText1"
+                  minlength="20" formControlName="websiteName"
+                  placeholder="Enter Wesbite Name">
+              </div>
+              <button type="submit" class="btn btn-success">Save changes</button>
+            </div>
+          </form>
+  
+        </div>
+      </div>
     </div>
   </div>

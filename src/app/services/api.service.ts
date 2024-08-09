@@ -53,4 +53,12 @@ export class ApiService {
     return this.http.put(`${this.baseUrl}/api/v1/auth/change-password-user/${id}`,obj)
   }
 
+  deleteWesbite(id : any){
+    return this.http.delete(`${this.baseUrl}/api/v1/panel/delete-website/${id}`);
+  }
+
+  updateWebsite(id:string, payload: any) {
+    return this.http.put(`${this.baseUrl}/api/v1/panel/update-website-panel/${id}`, payload);
+  }
+
 }

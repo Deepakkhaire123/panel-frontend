@@ -344,7 +344,7 @@
   #hWebsiteName3 {
     border-left: 1px solid #7e97a7 !important;
     width: 7% !important;
-    text-align-last: left;
+    text-align: center;
   }
   
   .redPOP{
@@ -655,5 +655,17 @@
     background-color: #7066e0;
     color: #fff;
     font-size: 1em;
+  }
+
+  .popinput{
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .popinput input {
+    width: 100%;
+    border-color: #000;
+    height: 33px;
+    margin-bottom: 15px;
   }
   

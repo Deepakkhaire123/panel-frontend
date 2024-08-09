@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
@@ -10,10 +10,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./web-list.component.css']
 })
 export class WebListComponent implements OnInit {
-
+  @ViewChild('closeRef') closeRef: any;
   addWebsite: any;
   motherID: any;
   showWebList: any;
+  updateWebsiteForm: any;
+  inputText1: string = '';
+  websiteId: any;
+
 
   constructor(private activeRoute: ActivatedRoute, private apiServe: ApiService) { }
 
@@ -26,6 +30,10 @@ export class WebListComponent implements OnInit {
       this.motherID = param.get('id')
     })
     this.getWebsitesList()
+
+    this.updateWebsiteForm = new FormGroup({
+      websiteName: new FormControl('', [Validators.required]),
+    });
   }
 
   getWebsitesList() {
@@ -104,5 +112,51 @@ export class WebListComponent implements OnInit {
     const style = document.createElement('style');
     style.textContent = customCss;
     document.head.append(style);
+  }
+
+  updateWebsiteName(data : any) {
+    this.websiteId = data?._id;
+    this.inputText1 = data?.websiteURL;
+  }
+
+  updateWebsiteData() {
+    const payload = {
+      websiteURL: this.updateWebsiteForm.value.websiteName,
+    };
+
+    this.apiServe.updateWebsite(this.websiteId, payload).subscribe(
+      (res: any) => {
+        if (res) {
+          this.showAlert1('Website Updated Successfully!');
+          this.updateWebsiteForm.reset();
+          this.getWebsitesList();
+          this.closeRef.nativeElement.click();
+        }
+      },
+      (error) => {
+        this.showAlert2(error.error.msg);
+      }
+    );
+  }
+
+  deleteWebsitePop(websiteId: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, Delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiServe.deleteWesbite(websiteId).subscribe((res: any) => {
+          if (res) {
+            this.showAlert1('Wesbite Deleted Successfully');
+            this.getWebsitesList();
+          }
+        });
+      }
+    });
   }
 }
