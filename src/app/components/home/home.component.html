@@ -19,8 +19,8 @@
           <div class="business-panel">
             <select class="business-option" formControlName="panelFor">
               <option value="">Choose User</option>
-              <option value="AGENT">Agent</option>
-              <option value="USER">User</option>
+              <option value="AGENT">AGENT</option>
+              <option value="USER">USER</option>
             </select>
             <p *ngIf="addDetails.get('panelFor').invalid && addDetails.get('panelFor').touched" class="validations-TTp" style="margin-left: 7px;">
               <span *ngIf="addDetails.get('panelFor')?.errors?.['required']" class="text-danger error-message-place">please select user.</span>
@@ -156,9 +156,9 @@
               Edit</button>
             <button class="btn btn-danger mx-2" (click)="deletePostPop(list?._id)">
               Delete</button>
-            <button class="btn btn-secondary" (click)="changePassword(list?._id)" data-toggle="modal"
+            <!-- <button class="btn btn-secondary" (click)="changePassword(list?._id)" data-toggle="modal"
               data-target="#changePass">
-              Change Password</button>
+              Change Password</button> -->
           </td>
         </tr>
 
@@ -180,10 +180,35 @@
         <form [formGroup]="updatePanelForm" (ngSubmit)="updatePanelData()">
           <div class="popinput">
             <div>
-              <p style="text-align: left;">Panel Name :</p>
+              <label for="inputBox1" style="text-align: left; width:100%">Panel Name :</label>
               <input #inputBox1 type="text" [(ngModel)]="inputText1"
                 minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="panelName"
                 placeholder="Enter Panel Name">
+
+                <label for="inputBox2" style="text-align: left; width:100%">UserId :</label>
+              <input #inputBox2 type="text" [(ngModel)]="inputText2"
+                minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="userId"
+                placeholder="Enter UserId">
+
+                <label for="inputBox3" style="text-align: left; width:100%">Business :</label>
+              <input #inputBox3 type="text" [(ngModel)]="inputText3"
+                minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="business"
+                placeholder="Enter Business">
+
+                <label for="inputBox4" style="text-align: left; width:100%">Panel For :</label>
+              <!-- <input #inputBox4 type="text" [(ngModel)]="inputText4"
+                minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="panelFor"
+                placeholder="Enter Panel For"> -->
+                <select class="update-select" [(ngModel)]="inputText4" formControlName="panelFor">
+                  <option value="">Choose User</option>
+                  <option value="AGENT">AGENT</option>
+                  <option value="USER">USER</option>
+                </select>
+                
+                <label for="inputBox5" style="text-align: left; width:100%">Password :</label>
+              <input #inputBox5 type="text" [(ngModel)]="inputText5"
+                minlength="20" (keyup)="updateCursorPosition1($event)" formControlName="password"
+                placeholder="Enter Password">
             </div>
             <button type="submit" class="btn btn-success">Save changes</button>
           </div>
@@ -196,7 +221,7 @@
 
 <!-- change password popup -->
 
-<div id="changePass" role="dialog" class="modal" aria-modal="true">
+<!-- <div id="changePass" role="dialog" class="modal" aria-modal="true">
   <div class="modal-dailog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -209,7 +234,7 @@
           <div class="new-password"><span class="input1">New
               Password</span><input type="password" placeholder="Enter" autocomplete="false"
               formControlName="newPassword" minlength="8" maxlength="14"
-              class="input1 ng-untouched ng-pristine ng-invalid inp1"><span class="must">*</span><!---->
+              class="input1 ng-untouched ng-pristine ng-invalid inp1"><span class="must">*</span>
             <p class="validations-p">
                   <small *ngIf="newPassword?.errors && newPassword?.errors?.['weakPassword']">
                     Uppercase,Lowercase,Number,Special character.
@@ -224,11 +249,11 @@
           <div class="confirmPassword"><span class="conform-new-password">Confirm Password
             </span><input type="password" placeholder="Enter" formControlName="confirmPassword" autocomplete="false"
               minlength="8" maxlength="14" class="ng-untouched ng-pristine ng-invalid inp2"><span class="must">*</span>
-            <!-- <p class="validations-p">
+            <! -- <p class="validations-p">
                     <small *ngIf="confirmPassword?.errors && confirmPassword?.errors?.['weakPassword']">
                       Uppercase,Lowercase,Number,Special character.
                     </small>
-                  </p> -->
+                  </p> -- >
                   <p *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)" class="validations-p">
                     <small *ngIf="confirmPassword?.errors?.['required']" class="text-danger error-message-place">Confirm Password is
                       required</small>
@@ -238,7 +263,7 @@
           <div class="old-password"><span class="input1">Your Password
             </span><input type="password" placeholder="Enter" autocomplete="false" formControlName="currentPassword"
               minlength="8" maxlength="14" class="ng-untouched ng-pristine ng-invalid inp3"><span
-              class="must">*</span><!---->
+              class="must">*</span>
               <p *ngIf="currentPassword?.invalid && (currentPassword?.touched || currentPassword?.dirty)" class="validations-p">
                 <small *ngIf="currentPassword?.errors?.['required']" class="text-danger error-message-place">Current Password is
                   required</small>
@@ -255,4 +280,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

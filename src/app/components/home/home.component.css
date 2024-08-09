@@ -838,3 +838,11 @@ small {
   outline: none;
   box-shadow: none;
 }
+
+.update-select {
+  width: 100%;
+  margin: 0 0 15px 0;
+  padding: 6px;
+  border-radius: 8px;
+  height: 33px;
+}
