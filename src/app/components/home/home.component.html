@@ -28,7 +28,7 @@
           </div>
           <div class="userid">
             <input id="searchUserId" type="text" minlength="4" maxlength="20" formControlName="name"
-               placeholder="Enter Name" required=""
+               placeholder="Enter Panel name" required=""
               class="search-input searchTB" style="margin-right: 10px;" ng-reflect-required="" ng-reflect-name="name">
             <p *ngIf="addDetails.get('name').invalid && addDetails.get('name').touched" class="validations-TTp topPWidth">
               <span *ngIf="addDetails.get('name')?.errors?.['required']" class="text-danger error-message-place">name is
@@ -132,7 +132,7 @@
       <thead class="tablehead">
         <tr>
           <th id="hWebsiteName1">Sr.No</th>
-          <th id="hWebsiteName2">Name</th>
+          <th id="hWebsiteName2">Panel Name</th>
           <th id="hWebsiteName3">UserID</th>
           <th id="hWebsiteName3">Business</th>
           <th id="hWebsiteName3">Panel for</th>
